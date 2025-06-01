@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Lista de Comentários</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f3f3f3;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 40px;
+    }
+
+    input[type="text"] {
+      width: 60%;
+      padding: 10px;
+      font-size: 16px;
+      margin-bottom: 10px;
+    }
+
+    button {
+      padding: 10px 20px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    table {
+      margin-top: 30px;
+      border-collapse: collapse;
+      width: 80%;
+    }
+
+    th, td {
+      border: 1px solid #ddd;
+      padding: 12px;
+      text-align: left;
+    }
+
+    th {
+      background-color: #4CAF50;
+      color: white;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>Buscar Comentários por URL</h2>
+  <input type="text" id="urlInput" placeholder="Digite a URL do site">
+  <button onclick="buscarComentarios()">Buscar Comentários</button>
+
+  <table id="tabelaComentarios" style="display: none;">
+    <thead>
+      <tr>
+        <th>Usuário</th>
+        <th>Comentário</th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- Comentários serão inseridos aqui -->
+    </tbody>
+  </table>
+
+  <script src="app.js"></script>
+</body>
+</html>

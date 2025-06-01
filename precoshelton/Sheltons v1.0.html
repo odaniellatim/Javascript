@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cálculo de Vendas Sheltons</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <style>
+        body {
+            background-color: #f5f5f5;
+            padding: 20px;
+            color: #333;
+        }
+
+        .container {
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            padding: 20px;
+        }
+
+        h1 {
+            color: #2c3e50;
+        }
+
+        .btn-primary {
+            background-color: #2c3e50;
+            border-color: #2c3e50;
+        }
+
+        .btn-primary:hover {
+            background-color: #34495e;
+            border-color: #34495e;
+        }
+
+        .btn-danger {
+            background-color: #e74c3c;
+            border-color: #e74c3c;
+        }
+
+        .table th {
+            background-color: #34495e;
+            color: white;
+            cursor: pointer;
+        }
+
+        .table th:hover {
+            background-color: #2c3e50;
+        }
+
+        .total-row {
+            background-color: #ecf0f1;
+            font-weight: bold;
+        }
+
+        .modal-content {
+            border-radius: 8px;
+        }
+
+        .action-btn {
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            padding: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="text-center mb-4">Cálculo de Vendas Sheltons</h1>
+        
+        <div class="row mb-4">
+            <div class="col-md-4 col-12 mb-2">
+                <button class="btn btn-primary w-100" onclick="openRegisterPopup()">Cadastrar Shelton</button>
+            </div>
+            <div class="col-md-4 col-12 mb-2">
+                <input type="text" class="form-control" id="searchInput" placeholder="Buscar por data ou nome" oninput="searchSheltons()">
+            </div>
+            <div class="col-md-4 col-12 d-flex gap-2">
+                <button class="btn btn-primary flex-grow-1" onclick="saveData()">Salvar Dados</button>
+                <button class="btn btn-primary flex-grow-1" onclick="importData()">Importar Dados</button>
+            </div>
+        </div>
+
+        <div class="table-responsive">
+            <table class="table table-striped" id="sheltonTable">
+                <thead>
+                    <tr>
+                        <th onclick="sortTable(0)">Data Compra</th>
+                        <th onclick="sortTable(1)">Nome Shelton</th>
+                        <th>Quantidade</th>
+                        <th>Preço Compra</th>
+                        <th onclick="sortTable(4)">Margem Lucro</th>
+                        <th>Preço Revenda</th>
+                        <th>Lucro Venda</th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+                <tbody id="tableBody"></tbody>
+                <tfoot id="tableFooter"></tfoot>
+            </table>
+        </div>
+    </div>
+
+    <!-- Modal de Cadastro -->
+    <div class="modal fade" id="registerModal" tabindex="-1" aria-labelledby="registerModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="registerModalLabel">Cadastrar Shelton</h5>
+                    <button type="button" class="btn-close" onclick="closePopup('registerModal')" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label for="purchaseDate" class="form-label">Data Compra</label>
+                        <input type="date" class="form-control" id="purchaseDate">
+                    </div>
+                    <div class="mb-3">
+                        <label for="sheltonName" class="form-label">Nome Shelton</label>
+                        <input type="text" class="form-control" id="sheltonName">
+                    </div>
+                    <div class="mb-3">
+                        <label for="quantity" class="form-label">Quantidade</label>
+                        <input type="number" class="form-control" id="quantity" min="1">
+                    </div>
+                    <div class="mb-3">
+                        <label for="purchasePrice" class="form-label">Preço Compra (R$)</label>
+                        <input type="number" class="form-control" id="purchasePrice" step="0.001">
+                    </div>
+                    <div class="mb-3">
+                        <label for="forcePrice" class="form-label">Preço Force (R$)</label>
+                        <input type="number" class="form-control" id="forcePrice" step="0.001">
+                    </div>
+                    <div class="mb-3">
+                        <label for="profitMargin" class="form-label">Margem Lucro (%)</label>
+                        <input type="number" class="form-control" id="profitMargin" step="0.01">
+                    </div>
+                    <div class="mb-3">
+                        <label for="taxRate" class="form-label">Taxa Imposto (%)</label>
+                        <input type="number" class="form-control" id="taxRate" step="0.01">
+                    </div>
+                    <div class="mb-3">
+                        <label for="notes" class="form-label">Anotações</label>
+                        <textarea class="form-control" id="notes" rows="4"></textarea>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" onclick="registerShelton()">Cadastrar</button>
+                    <button type="button" class="btn btn-secondary" onclick="closePopup('registerModal')">Cancelar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de Detalhes -->
+    <div class="modal fade" id="detailsModal" tabindex="-1" aria-labelledby="detailsModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content" id="detailsPopup"></div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script>
+        let sheltons = [];
+        let editingIndex = -1;
+        let sortDirection = 1;
+
+        function formatNumber(num) {
+            return num.toLocaleString('pt-BR', { minimumFractionDigits: 3, maximumFractionDigits: 3 });
+        }
+
+        function formatDate(isoDate) {
+            const [year, month, day] = isoDate.split('-');
+            return `${day}/${month}/${year}`;
+        }
+
+        function calculateValues(data) {
+            try {
+                const purchase = parseFloat(data.purchasePrice) || 0;
+                const force = parseFloat(data.forcePrice) || 0;
+                const margin = parseFloat(data.profitMargin) / 100 || 0;
+                const tax = parseFloat(data.taxRate) / 100 || 0;
+                const qty = parseInt(data.quantity) || 1;
+
+                const basePrice = purchase + force;
+                const resalePrice = basePrice * (1 + margin);
+                const taxValue = resalePrice * tax;
+                const saleProfit = resalePrice - basePrice - taxValue;
+
+                return {
+                    ...data,
+                    basePrice,
+                    resalePrice,
+                    taxValue,
+                    saleProfit,
+                    totalProfit: saleProfit * qty,
+                    investment: basePrice * qty
+                };
+            } catch (error) {
+                console.error('Erro nos cálculos:', error);
+                return { ...data, basePrice: 0, resalePrice: 0, taxValue: 0, saleProfit: 0, totalProfit: 0, investment: 0 };
+            }
+        }
+
+        function updateTable(data = sheltons) {
+            const tbody = document.getElementById('tableBody');
+            tbody.innerHTML = '';
+            let totalQty = 0;
+            let totalPurchase = 0;
+            let totalResale = 0;
+            let totalProfit = 0;
+
+            data.forEach((shelton, index) => {
+                const calc = calculateValues(shelton);
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                    <td>${formatDate(shelton.purchaseDate)}</td>
+                    <td>${shelton.sheltonName}</td>
+                    <td>${shelton.quantity}</td>
+                    <td>R$ ${formatNumber(calc.basePrice)}</td>
+                    <td>${shelton.profitMargin}%</td>
+                    <td>R$ ${formatNumber(calc.resalePrice)}</td>
+                    <td>R$ ${formatNumber(calc.saleProfit)}</td>
+                    <td>
+                        <button class="action-btn" onclick="editShelton(${index})">✏️</button>
+                        <button class="action-btn" onclick="deleteShelton(${index})">🗑️</button>
+                        <button class="action-btn" onclick="showNotes(${index})">📝</button>
+                        <button class="action-btn" onclick="showDetails(${index})">🔍</button>
+                    </td>
+                `;
+                tbody.appendChild(tr);
+                totalQty += parseInt(shelton.quantity);
+                totalPurchase += calc.basePrice * parseInt(shelton.quantity);
+                totalResale += calc.resalePrice * parseInt(shelton.quantity);
+                totalProfit += calc.saleProfit * parseInt(shelton.quantity);
+            });
+
+            document.getElementById('tableFooter').innerHTML = `
+                <tr class="total-row">
+                    <td colspan="2">Total</td>
+                    <td>${totalQty}</td>
+                    <td>R$ ${formatNumber(totalPurchase)}</td>
+                    <td></td>
+                    <td>R$ ${formatNumber(totalResale)}</td>
+                    <td>R$ ${formatNumber(totalProfit)}</td>
+                    <td></td>
+                </tr>
+            `;
+        }
+
+        function openRegisterPopup() {
+            editingIndex = -1;
+            document.getElementById('purchaseDate').value = '';
+            document.getElementById('sheltonName').value = '';
+            document.getElementById('quantity').value = '1';
+            document.getElementById('purchasePrice').value = '';
+            document.getElementById('forcePrice').value = '0';
+            document.getElementById('profitMargin').value = '';
+            document.getElementById('taxRate').value = '0';
+            document.getElementById('notes').value = '';
+            document.getElementById('registerModalLabel').textContent = 'Cadastrar Shelton';
+            new bootstrap.Modal(document.getElementById('registerModal')).show();
+        }
+
+        function showPopup(popupId) {
+            new bootstrap.Modal(document.getElementById(popupId)).show();
+        }
+
+        function closePopup(popupId) {
+            bootstrap.Modal.getInstance(document.getElementById(popupId)).hide();
+        }
+
+        function registerShelton() {
+            const requiredFields = {
+                'purchaseDate': 'Data Compra',
+                'sheltonName': 'Nome Shelton',
+                'quantity': 'Quantidade',
+                'purchasePrice': 'Preço Compra',
+                'profitMargin': 'Margem Lucro'
+            };
+
+            for (let field in requiredFields) {
+                if (!document.getElementById(field).value) {
+                    alert(`Por favor, preencha o campo ${requiredFields[field]}`);
+                    return;
+                }
+            }
+
+            const shelton = {
+                purchaseDate: document.getElementById('purchaseDate').value,
+                sheltonName: document.getElementById('sheltonName').value,
+                quantity: document.getElementById('quantity').value,
+                purchasePrice: document.getElementById('purchasePrice').value,
+                forcePrice: document.getElementById('forcePrice').value,
+                profitMargin: document.getElementById('profitMargin').value,
+                taxRate: document.getElementById('taxRate').value,
+                notes: document.getElementById('notes').value
+            };
+
+            if (editingIndex === -1) {
+                sheltons.push(shelton);
+            } else {
+                sheltons[editingIndex] = shelton;
+            }
+            
+            updateTable();
+            closePopup('registerModal');
+        }
+
+        function editShelton(index) {
+            editingIndex = index;
+            const shelton = sheltons[index];
+            document.getElementById('purchaseDate').value = shelton.purchaseDate;
+            document.getElementById('sheltonName').value = shelton.sheltonName;
+            document.getElementById('quantity').value = shelton.quantity;
+            document.getElementById('purchasePrice').value = shelton.purchasePrice;
+            document.getElementById('forcePrice').value = shelton.forcePrice;
+            document.getElementById('profitMargin').value = shelton.profitMargin;
+            document.getElementById('taxRate').value = shelton.taxRate;
+            document.getElementById('notes').value = shelton.notes || '';
+            document.getElementById('registerModalLabel').textContent = 'Editar Shelton';
+            showPopup('registerModal');
+        }
+
+        function showDetails(index) {
+            const shelton = calculateValues(sheltons[index]);
+            const popup = document.getElementById('detailsPopup');
+            popup.innerHTML = `
+                <div class="modal-header">
+                    <h5 class="modal-title" id="detailsModalLabel">Detalhes do Shelton</h5>
+                    <button type="button" class="btn-close" onclick="closePopup('detailsModal')" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <table class="table">
+                        <tr><td>Data Compra:</td><td>${formatDate(shelton.purchaseDate)}</td></tr>
+                        <tr><td>Nome:</td><td>${shelton.sheltonName}</td></tr>
+                        <tr><td>Quantidade:</td><td>${shelton.quantity}</td></tr>
+                        <tr><td>Preço Compra:</td><td>R$ ${formatNumber(parseFloat(shelton.purchasePrice))}</td></tr>
+                        <tr><td>Preço Force:</td><td>R$ ${formatNumber(parseFloat(shelton.forcePrice))}</td></tr>
+                        <tr><td>Margem Lucro:</td><td>${shelton.profitMargin}%</td></tr>
+                        <tr><td>Taxa Imposto:</td><td>${shelton.taxRate}%</td></tr>
+                        <tr><td>Preço Revenda:</td><td>R$ ${formatNumber(shelton.resalePrice)}</td></tr>
+                        <tr><td>Valor Taxa:</td><td>R$ ${formatNumber(shelton.taxValue)}</td></tr>
+                        <tr><td>Lucro Venda:</td><td>R$ ${formatNumber(shelton.saleProfit)}</td></tr>
+                        <tr><td>Total Lucro:</td><td>R$ ${formatNumber(shelton.totalProfit)}</td></tr>
+                        <tr><td>Investimento:</td><td>R$ ${formatNumber(shelton.investment)}</td></tr>
+                    </table>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" onclick="closePopup('detailsModal')">Fechar</button>
+                </div>
+            `;
+            showPopup('detailsModal');
+        }
+
+        function deleteShelton(index) {
+            if (confirm('Tem certeza que deseja excluir este Shelton?')) {
+                sheltons.splice(index, 1);
+                updateTable();
+            }
+        }
+
+        function showNotes(index) {
+            if (sheltons[index].notes) {
+                alert(sheltons[index].notes);
+            }
+        }
+
+        function sortTable(column) {
+            sheltons.sort((a, b) => {
+                switch(column) {
+                    case 0: return sortDirection * (new Date(a.purchaseDate) - new Date(b.purchaseDate));
+                    case 1: return sortDirection * a.sheltonName.localeCompare(b.sheltonName);
+                    case 4: return sortDirection * (parseFloat(a.profitMargin) - parseFloat(b.profitMargin));
+                }
+            });
+            sortDirection = -sortDirection;
+            updateTable();
+        }
+
+        function searchSheltons() {
+            const search = document.getElementById('searchInput').value.toLowerCase();
+            const filtered = sheltons.filter(s => {
+                const dateStr = formatDate(s.purchaseDate).toLowerCase();
+                return dateStr.includes(search) || s.sheltonName.toLowerCase().includes(search);
+            });
+            updateTable(filtered);
+        }
+
+        async function saveData() {
+            const data = JSON.stringify(sheltons);
+            const blob = new Blob([data], { type: 'text/plain' });
+
+            if (window.showSaveFilePicker) {
+                try {
+                    const fileHandle = await window.showSaveFilePicker({
+                        suggestedName: 'sheltons.txt',
+                        types: [{
+                            description: 'Text Files',
+                            accept: { 'text/plain': ['.txt'] },
+                        }],
+                    });
+                    const writable = await fileHandle.createWritable();
+                    await writable.write(blob);
+                    await writable.close();
+                    alert('Dados salvos com sucesso!');
+                } catch (error) {
+                    console.error('Erro ao salvar o arquivo:', error);
+                    alert('Erro ao salvar o arquivo. Usando método alternativo.');
+                    fallbackSaveData(blob);
+                }
+            } else {
+                fallbackSaveData(blob);
+            }
+        }
+
+        function fallbackSaveData(blob) {
+            const a = document.createElement('a');
+            a.href = URL.createObjectURL(blob);
+            a.download = 'Vendas Sheltons BD/sheltons.txt';
+            a.click();
+            URL.revokeObjectURL(a.href);
+        }
+
+        function importData() {
+            const input = document.createElement('input');
+            input.type = 'file';
+            input.accept = '.txt';
+            input.onchange = e => {
+                const file = e.target.files[0];
+                const reader = new FileReader();
+                reader.onload = event => {
+                    try {
+                        sheltons = JSON.parse(event.target.result);
+                        updateTable();
+                    } catch (error) {
+                        alert('Erro ao importar os dados');
+                    }
+                };
+                reader.readAsText(file);
+            };
+            input.click();
+        }
+
+        updateTable();
+    </script>
+</body>
+</html>

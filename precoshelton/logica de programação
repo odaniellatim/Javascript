@@ -1,0 +1,68 @@
+Calculo de vendas Sheltons.
+	- Design da pagina
+		- Crie um design clean e elegante
+		- Use tons de cinza e azul.
+		- Não use outras cores, apenas os indicados para manter o padrão.
+		- Botões de confirmação deve estar em destaque com a cor principal
+		- Botões que tem uma ação negativa pode usar o vermelho, mas somente se não tiver nenhuma atribuição.
+		- Procure usar padrões de design consolidados e atuais.
+		- Otimize o css para o site ser adaptado para os dispositivos moveis.
+		
+	- Crie botões com cores em destaque em azul
+	- Crie um botão para cadastrar os sheltons
+	- Para os valores em R$ use 3 casas decimais após a virgula e "." para casas de milhar.
+	- Formate a data para Brasil apresentando da seguinte forma (dd/mm/YYYY).
+	- Crie um campo de busca.
+	
+	- Crie uma tabela com os seguintes campos:
+		- Data de Compra
+		- Nome do shelton
+		- Quantidade 
+		- Preço de Compra (Unidade)
+		- Preço para Converter em Force
+		- Margem de lucro em %
+		- Taxa em % (imposto cobrado)
+		- Preço de Revenda (unidade), deve ser somado os valores de Preço de compra com o preço para converter em force somente depois aplicar a margem de lucro
+		- Valor em R$ da Taxa cobrado do valor de revenda
+		- Saldo total onde subtraimos o valor de imposto do valor de venda
+		- Lucro da venda em R$
+		- Total de lucro multiplicando o valor da quantidade pelo valor de venda da unidade.
+		- Valor de investimento onde multiplicamos o preço de compra pela quantidade.
+		- Adicione o icone com uma função de botão para editar e remover com fundo transparent
+			- O botão de apagar deve apresentar uma mensagem de confirmação, para evitar erros humanos.
+		- Crie um icone para apresentar as anotações, as anotações deve ser apresentadas em um popup.
+	
+	- Apresente a tabela da seguinte forma na pagina inicial
+		- A tabela deve ter os seguintes campos visiveis para o usuario
+			- Data da compra
+			- Nome do shelton
+			- Quantidade de Sheltons
+			- Preço de compra (Some os valores de Preço de compra com Preço para Converter em Force)
+			- Margem de lucro
+			- Preço de Revenda
+			- Lucro da venda
+			- Icone para editar
+			- Adicione um botão para visualizar todas as informações.
+			- Crie um icone para visualizar todos os dados cadastradas no sistema em um popup.
+			
+	- Na tabela deve ter botões de ordenação para os seguinte itens:
+		- Data de Compra
+		- Nome do Shelton (Ordem alfabetica)
+		- Margem de Lucro (Maior para o Menor ou vice versa)
+		
+	- Crie uma linha na tabela que fique ao final gerando a soma de todos os valores sendo.
+		- Quantidade de Sheltons
+		- Preço de compra (Deve somar apenas os valores de compra por unidade)
+		- Preço de Revenda (Deve somar o valor de revenda por e multiplicar pela quantidade de sheltons)
+		- Lucro da venda (Deve somar o lucro por venda e multiplicar pela quantidade de sheltons)
+	
+	- Para a proxima etapa crie um botão de cadastro dos sheltons
+		- Ao clicar no botão deve expandir apresentando os dados restantes
+	
+	
+	- Crie um botão ao lado oposto do de cadastro para Salvar os dados cadastrados em um arquivo txt
+	- Crie um botão ao lado do salvar dados para importar o arquivo txt.
+	- Crie uma pasta no diretorio / do usuario chamado de "Vendas Sheltons BD"
+
+
+- Caso você encontre algum conflito, corrija e me informe posteriormente as mudanças e conflitos.

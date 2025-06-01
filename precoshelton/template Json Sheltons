@@ -1,0 +1,31 @@
+Primeira coluna: Data (precisa ser convertida para DD-MM-YYYY)
+15/01/2025
+19/01/2025
+23/02/2025
+Segunda coluna: Nome do Shelton
+OREDO
+OREDO
+OREDO
+
+Terceira coluna: Quantidade
+25
+16
+61
+Quarta coluna: Preço de Compra
+ R$  800,000 
+ R$  650,000 
+ R$  600,000 
+Quinta coluna: Preço Force
+ R$  409,600 
+ R$  409,600 
+ R$  409,600 
+Sexta coluna: Lucro da Venda Total (precisaremos calcular a margem de lucro a partir disso)
+110
+110
+110
+Setima Coluna: Taxa Imposto
+20
+20
+20
+Colunas adicionais: Notas
+

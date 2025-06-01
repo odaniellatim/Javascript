@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Leitor de RSS</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .article-card { margin-bottom: 20px; padding: 15px; border: 1px solid #ddd; border-radius: 5px; }
+        .article-card img { max-width: 100px; border-radius: 5px; }
+        .sidebar { height: 100vh; background-color: #f8f9fa; padding: 20px; border-right: 1px solid #ddd; }
+        .content { padding: 20px; }
+        .article-sidebar {
+            height: 100vh;
+            background-color: #fff;
+            padding: 20px;
+            border-left: 1px solid #ddd;
+            overflow-y: auto;
+            position: fixed;
+            right: 0;
+            top: 0;
+            width: 40%;
+            transform: translateX(100%);
+            transition: transform 0.3s ease-in-out;
+        }
+        .article-sidebar.active { transform: translateX(0); }
+        .article-sidebar img { max-width: 100%; border-radius: 5px; }
+        .close-sidebar { position: absolute; top: 10px; right: 10px; cursor: pointer; font-size: 24px; }
+        .loading { display: none; text-align: center; }
+    </style>
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-3 sidebar">
+                <h3>Feeds RSS</h3>
+                <form id="feedForm" class="mb-3">
+                    <input type="url" class="form-control" id="feedUrl" placeholder="URL do Feed RSS" required>
+                    <button type="submit" class="btn btn-primary mt-2">Adicionar Feed</button>
+                </form>
+                <div id="feed-list"></div>
+            </div>
+
+            <div class="col-md-9 content">
+                <h1 class="text-center mb-4">Leitor de RSS</h1>
+                <div class="loading" id="loading">Carregando...</div>
+                <h2>Artigos</h2>
+                <div id="articles-list" class="mb-5"></div>
+                <div class="load-more">
+                    <button class="btn btn-secondary" id="loadMore">Mostrar Mais Artigos</button>
+                </div>
+                <h2>Favoritos</h2>
+                <div id="favorites-list"></div>
+            </div>
+
+            <div class="article-sidebar" id="article-sidebar">
+                <span class="close-sidebar" id="closeSidebar">×</span>
+                <img id="sidebarArticleImage" src="" alt="Imagem do artigo" class="mb-3">
+                <h3 id="sidebarArticleTitle"></h3>
+                <div id="sidebarArticleContent"></div>
+                <button class="btn btn-info mt-3" id="copyContent">Copiar Texto</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
+    <script>
+        class RSSReader {
+            constructor() {
+                this.articles = [];
+                this.favorites = [];
+                this.feeds = JSON.parse(localStorage.getItem('rssFeeds')) || [];
+                this.visibleArticles = 10;
+                this.proxyUrl = 'https://cors-anywhere.herokuapp.com/'; // Proxy temporário para CORS
+                this.init();
+            }
+
+            init() {
+                this.loadStoredData();
+                this.setupEventListeners();
+                this.displayFeeds();
+                this.feeds.forEach(feed => feed.selected && this.loadFeed(feed.url));
+            }
+
+            loadStoredData() {
+                this.favorites = JSON.parse(localStorage.getItem('rssFavorites')) || [];
+                this.displayFavorites();
+            }
+
+            setupEventListeners() {
+                document.getElementById('feedForm').addEventListener('submit', (e) => this.handleFeedSubmit(e));
+                document.getElementById('loadMore').addEventListener('click', () => this.loadMoreArticles());
+                document.getElementById('closeSidebar').addEventListener('click', () => this.closeSidebar());
+                document.getElementById('copyContent').addEventListener('click', () => this.copyContent());
+            }
+
+            async handleFeedSubmit(e) {
+                e.preventDefault();
+                const feedUrl = document.getElementById('feedUrl').value;
+                if (!this.validateUrl(feedUrl)) return alert('URL inválida!');
+                this.feeds.push({ url: feedUrl, selected: true });
+                localStorage.setItem('rssFeeds', JSON.stringify(this.feeds));
+                this.displayFeeds();
+                await this.loadFeed(feedUrl);
+                document.getElementById('feedUrl').value = '';
+            }
+
+            validateUrl(url) {
+                try {
+                    new URL(url);
+                    return true;
+                } catch {
+                    return false;
+                }
+            }
+
+            async loadFeed(feedUrl) {
+                const loading = document.getElementById('loading');
+                loading.style.display = 'block';
+                try {
+                    const response = await fetch(this.proxyUrl + feedUrl);
+                    if (!response.ok) throw new Error(`Erro HTTP: ${response.status}`);
+                    const text = await response.text();
+                    const parser = new DOMParser();
+                    const xmlDoc = parser.parseFromString(text, 'text/xml');
+
+                    // Verificar se há erro no XML
+                    if (xmlDoc.getElementsByTagName('parsererror').length > 0) {
+                        throw new Error('Erro ao parsear o XML do feed.');
+                    }
+
+                    let items = xmlDoc.getElementsByTagName('item'); // RSS
+                    if (items.length === 0) {
+                        items = xmlDoc.getElementsByTagName('entry'); // Atom
+                    }
+
+                    const newArticles = Array.from(items).map(item => {
+                        const isAtom = item.tagName === 'entry';
+                        return {
+                            title: isAtom
+                                ? item.getElementsByTagName('title')[0]?.textContent || 'Sem título'
+                                : item.getElementsByTagName('title')[0]?.textContent || 'Sem título',
+                            description: isAtom
+                                ? item.getElementsByTagName('summary')[0]?.textContent || item.getElementsByTagName('content')[0]?.textContent || 'Sem descrição'
+                                : item.getElementsByTagName('description')[0]?.textContent || 'Sem descrição',
+                            pubDate: isAtom
+                                ? item.getElementsByTagName('updated')[0]?.textContent || item.getElementsByTagName('published')[0]?.textContent || new Date().toISOString()
+                                : item.getElementsByTagName('pubDate')[0]?.textContent || new Date().toISOString(),
+                            enclosure: { link: item.getElementsByTagName('enclosure')[0]?.getAttribute('url') || '' },
+                            thumbnail: item.getElementsByTagName('media:thumbnail')[0]?.getAttribute('url') || 
+                                       item.getElementsByTagName('media:content')[0]?.getAttribute('url') || '',
+                            feedUrl: feedUrl
+                        };
+                    });
+
+                    if (newArticles.length === 0) {
+                        throw new Error('Nenhum artigo encontrado no feed.');
+                    }
+
+                    this.articles = [...this.articles, ...newArticles];
+                    this.filterArticles();
+                } catch (error) {
+                    console.error('Erro ao carregar feed:', error);
+                    alert(`Erro ao carregar o feed: ${error.message}. Verifique a URL ou tente novamente.`);
+                } finally {
+                    loading.style.display = 'none';
+                }
+            }
+
+            displayFeeds() {
+                document.getElementById('feed-list').innerHTML = this.feeds.map((feed, index) => `
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="feed-${index}" ${feed.selected ? 'checked' : ''} onchange="rssReader.toggleFeed(${index})">
+                        <label class="form-check-label" for="feed-${index}">${feed.url}</label>
+                    </div>
+                `).join('');
+            }
+
+            toggleFeed(index) {
+                this.feeds[index].selected = !this.feeds[index].selected;
+                localStorage.setItem('rssFeeds', JSON.stringify(this.feeds));
+                this.filterArticles();
+            }
+
+            filterArticles() {
+                const selectedFeeds = this.feeds.filter(feed => feed.selected).map(feed => feed.url);
+                const filteredArticles = this.articles.filter(article => selectedFeeds.includes(article.feedUrl));
+                this.displayArticles(filteredArticles);
+            }
+
+            displayArticles(articles = this.articles) {
+                const articlesList = document.getElementById('articles-list');
+                const visibleItems = articles.slice(0, this.visibleArticles);
+                articlesList.innerHTML = visibleItems.map((article, index) => `
+                    <div class="article-card d-flex align-items-center">
+                        <img src="${this.getArticleImage(article)}" alt="Imagem do artigo" class="me-3">
+                        <div class="flex-grow-1">
+                            <a href="#" class="h5 text-decoration-none article-link" data-index="${index}">${article.title}</a>
+                        </div>
+                        <button class="btn btn-success btn-sm" onclick="rssReader.markAsRead(${index})">Marcar como Lido</button>
+                        <button class="btn btn-warning btn-sm ms-2" onclick="rssReader.addToFavorites(${index})">Salvar</button>
+                    </div>
+                `).join('');
+                document.getElementById('loadMore').style.display = articles.length > this.visibleArticles ? 'block' : 'none';
+
+                document.querySelectorAll('.article-link').forEach(link => {
+                    link.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        const index = parseInt(link.getAttribute('data-index'));
+                        this.openSidebar(index);
+                    });
+                });
+            }
+
+            loadMoreArticles() {
+                this.visibleArticles += 10;
+                this.displayArticles();
+            }
+
+            getArticleImage(article) {
+                return article.enclosure?.link || article.thumbnail || 'https://via.placeholder.com/100';
+            }
+
+            openSidebar(index) {
+                const article = this.articles[index];
+                if (!article) return;
+                document.getElementById('sidebarArticleImage').src = this.getArticleImage(article);
+                document.getElementById('sidebarArticleTitle').innerText = article.title;
+                document.getElementById('sidebarArticleContent').innerHTML = `
+                    <p>${article.description || 'Conteúdo não disponível.'}</p>
+                    <p><strong>Publicado em:</strong> ${new Date(article.pubDate).toLocaleDateString()}</p>
+                `;
+                document.getElementById('article-sidebar').classList.add('active');
+            }
+
+            closeSidebar() {
+                document.getElementById('article-sidebar').classList.remove('active');
+            }
+
+            copyContent() {
+                const content = document.getElementById('sidebarArticleContent').innerText;
+                navigator.clipboard.writeText(content)
+                    .then(() => alert('Texto copiado!'))
+                    .catch(() => alert('Erro ao copiar texto.'));
+            }
+
+            markAsRead(index) {
+                alert(`Artigo "${this.articles[index].title}" marcado como lido.`);
+            }
+
+            addToFavorites(index) {
+                const article = this.articles[index];
+                if (!this.favorites.includes(article)) {
+                    this.favorites.push(article);
+                    this.articles.splice(index, 1);
+                    localStorage.setItem('rssFavorites', JSON.stringify(this.favorites));
+                    this.displayArticles();
+                    this.displayFavorites();
+                }
+            }
+
+            displayFavorites() {
+                document.getElementById('favorites-list').innerHTML = this.favorites.map((favorite, index) => `
+                    <div class="article-card d-flex align-items-center">
+                        <img src="${this.getArticleImage(favorite)}" alt="Imagem do artigo" class="me-3">
+                        <div class="flex-grow-1">
+                            <a href="#" class="h5 text-decoration-none favorite-link" data-index="${index}">${favorite.title}</a>
+                        </div>
+                        <button class="btn btn-success btn-sm" onclick="rssReader.markAsReadFavorites(${index})">Marcar como Lido</button>
+                        <button class="btn btn-danger btn-sm ms-2" onclick="rssReader.removeFromFavorites(${index})">Remover</button>
+                    </div>
+                `).join('');
+
+                document.querySelectorAll('.favorite-link').forEach(link => {
+                    link.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        const index = parseInt(link.getAttribute('data-index'));
+                        this.openSidebarFavorites(index);
+                    });
+                });
+            }
+
+            openSidebarFavorites(index) {
+                const favorite = this.favorites[index];
+                if (!favorite) return;
+                document.getElementById('sidebarArticleImage').src = this.getArticleImage(favorite);
+                document.getElementById('sidebarArticleTitle').innerText = favorite.title;
+                document.getElementById('sidebarArticleContent').innerHTML = `
+                    <p>${favorite.description || 'Conteúdo não disponível.'}</p>
+                    <p><strong>Publicado em:</strong> ${new Date(favorite.pubDate).toLocaleDateString()}</p>
+                `;
+                document.getElementById('article-sidebar').classList.add('active');
+            }
+
+            markAsReadFavorites(index) {
+                alert(`Artigo "${this.favorites[index].title}" marcado como lido.`);
+            }
+
+            removeFromFavorites(index) {
+                const favorite = this.favorites[index];
+                this.favorites.splice(index, 1);
+                this.articles.push(favorite);
+                localStorage.setItem('rssFavorites', JSON.stringify(this.favorites));
+                this.displayFavorites();
+                this.displayArticles();
+            }
+        }
+
+        const rssReader = new RSSReader();
+    </script>
+</body>
+</html>
