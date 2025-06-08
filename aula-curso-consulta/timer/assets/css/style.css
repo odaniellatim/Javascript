@@ -1,0 +1,78 @@
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:400,700&display=swap');
+:root {
+  --primary-color: rgb(17, 86, 102);
+  --primary-color-darker: rgb(9, 48, 56);
+  --color-white: rgb(255, 255, 255);
+}
+
+* {
+  box-sizing: border-box;
+  outline: 0;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background: var(--primary-color);
+  font-family: 'Open sans', sans-serif;
+  font-size: 1.3em;
+  display: grid;
+}
+
+h1{
+  font-size: 1em;
+  color: var(--color-white);
+  background-color: #333;
+  margin:0 auto -15px auto;
+  width: 200px;
+  position:relative;
+  z-index: 10;
+  border-radius: 10px;
+}
+
+.container {
+  grid-row: 1;
+  max-width: 640px;
+  margin: 50px auto;
+  background: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  text-align: center;
+}
+
+.button-align {
+  width: 100%;
+  padding: 10px;
+}
+
+button {
+  border: none;
+  background: var(--primary-color);
+  color: #fff;
+  font-size: 18px;
+  font-weight: 700;
+  width: 150px;
+  height: 45px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+button:hover {
+  background: var(--primary-color-darker);
+}
+
+.relogio{
+  font-size: 2.7em;
+  font-weight: bold;
+  background-color: #f4f4f4;
+  padding: 10px;
+  border-radius: 10px;
+  border:2px solid rgb(244, 244, 244);
+}
+
+.pausado{
+  color: rgb(158, 2, 2);
+  border:2px solid;
+}
