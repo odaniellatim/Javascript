@@ -23,8 +23,9 @@ const pessoa = {
   idade: 30,
 };
 
+let i = 0;
 for (let valor of frutas) {
-  console.log(valor);
+  console.log(`ID: ${i++} -> ${valor}`);
 }
 
 frutas.forEach(function (valor, indice, array) {

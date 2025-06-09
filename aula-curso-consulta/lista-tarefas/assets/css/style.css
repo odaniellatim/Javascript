@@ -1,0 +1,143 @@
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:400,700&display=swap');
+:root {
+  --primary-color: rgb(17, 86, 102);
+  --primary-color-darker: rgb(9, 48, 56);
+
+  --border-radius: 5px;
+}
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-size: 1rem;
+}
+
+body {
+  margin: 0;
+  padding: 35px;
+  background: var(--primary-color);
+  font-family: 'Open sans', sans-serif;
+
+}
+
+.container {
+  border:2px solid var(--primary-color-darker);
+  border-radius: var(--border-radius);
+  padding: 10px;
+  background: #f4f4f4;
+  min-width: 320px;
+  max-width: 900px;
+  margin: 0 auto;
+
+  /* Grid layout */
+  display: grid;
+  grid-template-areas: 
+    "item1 item1 item1"
+    "item2 item 2 item2"  
+    "item3 item 3 item3"
+    ;
+  gap: 10px;
+  grid-template-columns: repeat(3, minmax(1fr, auto));
+  
+}
+
+/* Headline da Página */
+
+
+.item1{
+  border-radius: var(--border-radius);
+
+  /* Grid layout */
+  grid-area: item1;
+  grid-row: 1;
+  grid-column: 1/4;
+  
+}
+
+h1{
+  padding: 20px auto;
+  font-size: 2rem;
+  text-align: center;
+}
+
+
+
+.item2{
+
+  border-radius: var(--border-radius);
+  padding: 10px 10px 20px 10px;
+  border-bottom: 1px solid #f4f4f4;
+
+  /* Grid layout */
+  display: grid;
+  grid-area: item2;
+  grid-row: 2;
+  grid-template-columns: repeat(auto-fit, minmax(200px, auto));
+  grid-column: 1/4;
+  gap:10px;
+}
+
+.input-tarefa{
+  padding: 10px;
+  border-radius: var(--border-radius);
+  border: 1px solid var(--primary-color-darker);
+}
+
+.btn-tarefa{
+  height: 40px;
+  font-weight: bold;
+  color: #fff;
+  cursor: pointer;
+
+  border-radius: var(--border-radius);
+  border: 1px solid var(--primary-color-darker);
+
+  background-color: var(--primary-color)
+
+}
+
+.input-tarefa:focus{
+  border-color: var(--primary-color);
+  outline: none;
+}
+
+.item3, ul {
+  /* Grid layout */
+  display: grid;
+  grid-area: item3;
+  grid-template-columns: repeat(auto-fit, minmax(200px, auto));
+  grid-column: 1/ 4;
+  grid-row: 3;
+  gap: 10px
+}
+
+.item3 ul li{
+  border-radius: var(--border-radius);
+  background: rgb(213, 220, 238);
+  list-style: none;
+  padding-left: 10px;
+
+  /* Grid layout */
+  display: grid;
+  grid-template-columns: 4fr 1fr;
+  align-items: center;
+
+}
+
+.apagar{
+  background-image: url("../img/trash-fill.svg");
+  background-size: 20px;
+  background-position: center;
+  background-color: rgb(213, 220, 238);
+  background-repeat: no-repeat;
+
+  width: 50px;
+  height: 50px;
+  padding: 10px;
+  
+  border: none;
+  border-radius: var(--border-radius);
+  font-size: 0px;
+  cursor: pointer;
+}
