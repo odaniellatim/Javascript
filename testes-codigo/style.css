@@ -1,33 +1,99 @@
 *{
   padding: 0;
   margin: 0;
+  box-sizing: border-box;
+}
+:root{
+  --border-radius: 10px;
+  --padding: 10px;
 }
 
 body{
-  font: 20px;
-  font-family: sans-serif;
-}
-.container{
-  margin: 30px auto;
-  width: 450px;
-  border: 1px solid #a1a1a1;
-  padding: 15px;
-  border-radius: 10px;
-}
-.cadastro{
-  margin: 10px 0;
+  font: 1rem sans-serif;
 }
 
-.cadastro input, button{
-  padding: 5px;
-  width: 150px;
-  display: inline;
+.container{
+  margin: 30px auto;
+  min-width: 412px;
+  max-width: 600px;
+  border: 1px solid #a1a1a1;
+  padding: var(--padding);
+  border-radius: var(--border-radius);
+}
+
+.cadastro{  
+  margin: 10px 0;
+  display: grid;
+  grid-column: 1fr 1fr;
+  grid-template-areas: 
+  "input1 input2 "
+  "btn btn";
+  gap: 5px;
+}
+
+
+.texto-item, .valor-item{
+  font-size: 1.2rem;
+  padding: var(--padding);
+  grid-area: input1;
+  outline: none;
+  border-radius: var(--border-radius);
+  border:1px solid #a1a1a1;
+}
+
+.valor-item{
+  grid-area: input2;
+}
+
+.button{
+  padding: var(--padding);
+  grid-area: btn;
+  font-weight: bold;
+  font-size: 1.2rem;
+  border-radius: var(--border-radius);
+  background-color: blue;
+  color: #fdfcfc;
+  border: none;
+  cursor: pointer;
+
   
 }
 
-.lista p{
-  background: #f4f4f4;
-  padding: 10px;
-  border-radius: 5px;
-  margin: 5px 0;
+.carrinho{
+  display: grid;
+  grid-column: 1fr 1fr;
+  grid-template-areas: "totalProduto valorProduto";
+  background-color:rgb(185, 230, 230);
+  padding: var(--padding);
+  border-radius: var(--border-radius);
+  font-style: italic;
+  text-align: center;
+  margin: 15px 0;
+}
+
+.total-produto{
+  grid-area: totalProduto;
+}
+
+.valor-total{
+  grid-area: valorProduto;
+}
+
+.alinhamento{
+  display: grid;
+  grid-column: 1fr 1fr;
+  grid-template-areas: p1 p2;
+  gap:5px;
+}
+.item{
+  background: rgb(240, 240, 240);
+  border-radius: var(--border-radius);
+  border: 1px solid #e4e3e3;
+  padding: var(--padding);
+  display: inline;
+  align-content: space-between;
+
+}
+.price{
+  float: right;
 }
