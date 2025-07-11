@@ -25,7 +25,7 @@ statusBar.classList.remove("erro", "sucess");
 hidenNotify();
 
 function calcularValor(e) {
-  const eventoTarget = e.target;
+  // const eventoTarget = e.target;
 
   const number1 = valorInput1.value;
   const number2 = valorInput2.value;
@@ -68,15 +68,15 @@ function calcularValor(e) {
 }
 
 function resultadoConta(valor1, valor2, valor3) {
-  let template = `<b>R$ ${valor1.toFixed(2)}</b> + `;
-  template += `<b>R$ ${valor2.toFixed(2)}</b> = `;
+  let template = `R$ ${valor1.toFixed(2)} + `;
+  template += `R$ ${valor2.toFixed(2)} = `;
   template += `<b>R$ ${valor3.toFixed(2)}</b> `;
 
   const newElement = document.createElement("p");
   resultado.appendChild(newElement);
 
   newElement.innerHTML += template;
-  console.log(valoresDicionario);
+  // console.log(valoresDicionario);
 }
 
 // function calcular(){
