@@ -1,44 +1,67 @@
 class NomeUser {
-  constructor(nome, sobreNome) {
-    this.nome = nome;
-    this.sobreNome = sobreNome;
+  constructor(name, lastname) {}
+
+  nomeCompleto(nameValue, lastnameValue) {
+    return this.validaCampos(nameValue, lastnameValue);
   }
 
-  nomeCompleto() {
-    let inputNome = this.nome.value;
-    let inputSobrenome = this.sobreNome.value;
+  validaCampos(nome, sobrenome) {
     const div = document.querySelector(".nomeCompleto");
 
-    // if (inputNome && inputSobrenome) {
-    // }
-
-    if (!inputNome) {
+    if (!nome) {
       return (div.innerHTML = "<strong>Nome está vazio</strong>");
     }
-    if (!inputSobrenome) {
+    if (!sobrenome) {
       return (div.innerHTML = "<strong>Sobrenome está vazio</strong>");
-    } else {
-      let nc = `<span>${inputNome} ${inputSobrenome}</span>`;
-      return nc;
     }
+
+    return `<span>${nome} ${sobrenome}</span>`;
   }
 
-  imprimeNome() {
+  imprimeNome(nomeCompletoFormatado) {
     const div = document.querySelector(".nomeCompleto");
-    const nomeImpresso = (div.innerHTML = `<b>${this.nomeCompleto()}</b>`);
-
-    return nomeImpresso;
+    return (div.innerHTML = `<b>${nomeCompletoFormatado}</b>`);
   }
 
-  start() {
+  completo() {
+    const campoNome = document.querySelector("#name"); // Acessa os elementos aqui
+    const campoSobrenome = document.querySelector("#lastname"); // Acessa os elementos aqui
+
+    // Extrai os valores dos inputs AQUI, no momento do clique
+    const inputNome = campoNome.value;
+    const inputSobrenome = campoSobrenome.value;
+
+    // Chama nomeCompleto com os valores
+    const nomeCompletoFormatado = this.nomeCompleto(inputNome, inputSobrenome);
+
+    // Passa o nome completo formatado para imprimeNome
+    this.imprimeNome(nomeCompletoFormatado);
+  }
+
+  clickButton() {
     const button = document.querySelector(".button");
 
     button.addEventListener("click", () => {
-      this.imprimeNome();
+      this.completo();
+      this.log();
     });
+  }
+
+  clickEnter() {
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Enter") {
+        this.completo();
+      }
+      this.log();
+    });
+  }
+
+  log() {
+    console.log("Eventos de click e execução");
   }
 }
 
-const user1 = new NomeUser(document.querySelector("#name"), document.querySelector("#lastname"));
+const user1 = new NomeUser();
 
-user1.start();
+user1.clickEnter();
+user1.clickButton();
