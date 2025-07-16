@@ -14,7 +14,7 @@ body{
   font: 1rem sans-serif;
 }
 
-.container, .nomeCompleto{
+.container, .nomeCompleto, .log{
   margin: 25px auto;
   padding: 10px;
   width: 350px;
@@ -40,18 +40,19 @@ button{
   border: 1px solid #c7c7c7;
 }
 
-.nomeCompleto{
+.nomeCompleto,.log{
   min-height: 150px;
 }
 
-strong{
+strong, .erro{
   color: red;
   text-align: center;
   display: block;
 }
 
-span{
+span, .sucess{
   color: rgb(15, 104, 42);
   text-align: center;
   display: block;
 }
+
