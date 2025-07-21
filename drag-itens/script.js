@@ -21,3 +21,8 @@ btn.addEventListener("click", () => {
     caixa1.appendChild(el);
   });
 });
+
+/*
+Testando a fonte usando no vs code para entender as diferenças e também qual é mais facil para ler e entender nos minimos detalhes.
+
+*/
