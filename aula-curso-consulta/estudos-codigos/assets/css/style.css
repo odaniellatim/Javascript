@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css?family=Open+Sans:400,700&display=swap');
 :root {
-  --primary-color: rgb(17, 86, 102);
-  --primary-color-darker: rgb(9, 48, 56);
+  --primary-color: rgb(66, 78, 95);
+  --primary-color-darker: rgb(33, 52, 92);
 }
 
 * {

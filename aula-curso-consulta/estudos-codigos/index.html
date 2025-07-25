@@ -3,26 +3,39 @@
 
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Exercicio Aula 34</title>
-  <link rel="stylesheet" href="./assets/css/style.css">
+  <title>Bolinhas com POO</title>
+  <link rel="stylesheet" href="./assets/css/style-bolinhas.css">
 </head>
 
 <body>
 
-  <section class="container">
-    <h1>Página de Testes de Codigo JS</h1>
-    <input class="nome" />
-    <button id="button">Alterar Nome</button>
-    
-    <div id="resultado"></div>
-    
-  </section>
+  <div id="controles" class="controles">
+
+    <div class="controle">
+      <label>Número de objetos</label>
+      <p id="num_objetos">0</p>
+    </div>
+
+    <div class="controle">
+      <label>Quantidade de Objetos</label>
+      <input type="number" value="0" min="0" id="txt_qntde">
+      <button id="btn_add">Adicionar</button>
+    </div>
+
+    <div class="controle">
+      
+      <button id="btn_remover">Remover</button>
+    </div>
+
+  </div>
+
+  <div id="palco" class="palco"></div>
 
   
 
-  <script src="./assets/js/mais.js"></script>
+  <script src="./assets/js/bolinhas.js"></script>
 </body>
 
 </html>
