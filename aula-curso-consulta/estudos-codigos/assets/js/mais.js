@@ -17,7 +17,7 @@ class Base {
   }
 }
 
-//classe
+//classe base para criar a pessoa
 class Pessoa extends Base {
   constructor(dataAtual) {
     super(dataAtual);
