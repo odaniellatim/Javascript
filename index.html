@@ -1,32 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="style.css">
-    <script src="main.js" defer></script>
-</head>
-<body>
-    <div class="container">
-      <h1>Cadastro de Items</h1>
-      <div class="cadastro">
-        <input type="text" class="texto-item" placeholder="Nome do produto"/>
-        <input type="number" class="valor-item" placeholder="Valor do produto">
-        <button class="button">Cadastrar Item</button>
-      </div>
-      
-      <div class="carrinho">
-        <div class="total-produto">
-          Nenhum produto no carrinho
-        </div>
-        <div class="valor-total">
-          Total Carrinho: <b>R$ 00,00</b>.
-        </div>
-      </div>
 
-      <div class="lista">Lista Items</div>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="main.js" defer></script>
+</head>
+
+<body>
+  <div class="container">
+    <h1>Cadastro de Items</h1>
+    <div class="cadastro">
+      <input type="text" class="texto-item" placeholder="Nome do produto" />
+      <input type="number" class="valor-item" placeholder="Valor do produto">
+      <button class="button">Cadastrar Item</button>
     </div>
-    
+
+    <div class="carrinho">
+      <div class="total-produto">
+        Nenhum produto no carrinho, cadastre um item novo.
+      </div>
+      <div class="valor-total">
+        Total Carrinho: <b>R$ 00,00</b>.
+      </div>
+    </div>
+
+    <div class="lista">Lista Items</div>
+  </div>
+
 </body>
+
 </html>
