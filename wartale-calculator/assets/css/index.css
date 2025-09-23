@@ -19,12 +19,20 @@
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: center;
+<<<<<<< HEAD
     gap: 15px;
+=======
+>>>>>>> 03806914dcdade48a309a3069f7ba704f6f534ce
 
 }
 
 .menu-align label {
     flex-grow: 2;
+<<<<<<< HEAD
+=======
+    margin: 10px;
+    padding: 5px;
+>>>>>>> 03806914dcdade48a309a3069f7ba704f6f534ce
     text-align: left;
 }
 
