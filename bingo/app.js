@@ -3,7 +3,8 @@
 
 // O array vai ser usado para representar o numero selecionado pelo usuario.
 const numeroCartela = [];
-const numeroMaximo = 50 + 1
+const tempoRodada = 1000;
+const numeroMaximo = 50 + 1 // Deve adicionar 1 para corrigir o numero final do loop
 const numerosSorteado = [];
 
 //Randomizar os numeros da cartela
@@ -25,7 +26,19 @@ function RandomizarNumero(numeroMaximo) {
     }
 }
 
-RandomizarNumero(numeroMaximo)
+function numeroRodada() {
 
-console.log(numeroCartela)
-console.log(numeroCartela.sort((a, b) => a - b))
+    RandomizarNumero(numeroMaximo);
+
+    for (let rodada = 0; rodada <= numeroCartela.length; rodada++) {
+        const elementoRemovido = numeroCartela.shift();
+        console.log(`Rodada: ${rodada}: ${elementoRemovido}`)
+        numerosSorteado.push(elementoRemovido)
+    }
+
+
+}
+
+
+setTimeout(numeroRodada, tempoRodada)
+console.log(numerosSorteado)
