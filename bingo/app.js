@@ -21,7 +21,7 @@ function gerarCartelaGlobal(numeroMaximo) {
 // Gerar os numeros aleatórios com base no numero maximo da cartela
 function RandomizarNumero() {
     arrayNumeros = []
-    for (let n = 0; n < numeroMaximo; n++) {
+    for (let n = 0; n < numeroMaxCartela; n++) {
         const numero = Math.floor(Math.random() * numeroMaximo)
         if (!arrayNumeros.includes(numero)) {
             arrayNumeros.push(numero);
@@ -88,7 +88,8 @@ O objetivo desse programa é gerar uma lista de numeros onde o usuario vai infor
 */
 
 // Configuração do Sistema que o usario vai informar para o programa funcionar corretamente.
-const numeroMaximo = 10 // Quantidade de numeros da cartela que o usuario vai informar
+const numeroMaximo = 75 // Quantidade de numeros da cartela que o usuario vai informar
+const numeroMaxCartela = 24 // Numero maximo disponivel por cartela. Não pode ser maior que o numeroMaximo disponivel.
 const tempoRodada = 2000; // Tem que vai levar para apresentar um numero ao outro.
 let participantes = ["Daniel", "Gabriel", "Davi", "Leona", "Pitu", "Boot"]; // Jogadores informados pelo usuario
 
@@ -109,12 +110,19 @@ gerarCartelaGlobal(numeroMaximo); // Gera o array com numeros aleatórios
 numeroCartelaRodada(); // Gera os numeros da cartela dos usuarios
 
 //Criando a verificação dos numeros que sairam e comparar com as cartelas dos usuarios para atribuir a pontuação corretamente.
-numeros_usuarios = cartelaUsuarios.map((value, index) => {
-    let cartelas_criadas = value.numero_cartela;
-    return cartelas_criadas
-})
+// Essa função deve ser chamada após sair um numero com o setInterval, assim ele não remove os itens da lista tudo de uma unica vez.
+function verificaNumerosCartelasParticipantes() {
+    const numerosParaRemover = new Set(numeroCartela);
+
+    const arrayResultado = cartelaUsuarios.map(subArray =>
+        subArray.numero_cartela.filter(numero => !numerosParaRemover.has(numero))
+    );
+
+    return arrayResultado
+}
+
 // console.log(numeros_usuarios)
-// console.log(numerosSorteado)
+console.log(numeroCartela)
 
 // console.log(cartelaUsuarios, "\n")
 
