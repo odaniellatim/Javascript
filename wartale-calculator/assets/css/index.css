@@ -1,48 +1,100 @@
+@import url('https://fonts.googleapis.com/css2?family=Barlow:wght@400;600&display=swap');
+
+:root {
+    /* -- Margins sistema -- */
+    --var-margin10px: 10px;
+    --var-margin15px: 15px;
+
+    /* -- Padding sistema -- */
+    --var-padding10px: 10px;
+    --var-padding15px: 15px;
+
+    /* -- Border Radius sistema -- */
+    --border-radius: 5px;
+
+    /* -- Fonte sistema -- */
+    --font-size: 16px;
+    --font-sizeh1: 32px;
+    --font-sizeh2: 28px;
+    --font-sizeh3: 24px;
+    --font-sizeh4: 20px;
+
+    /* -- Fonte Family sistema -- */
+    --font-family-sistema: "Barlow", monospace, sans-serif;
+
+    /* -- Fonte Color sistema -- */
+    --color-font-ligt: #f4f4f4;
+    --color-font-dark: #333333;
+
+}
+
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    font-family: var(--font-family-sistema);
+    font-size: var(--font-size);
+
+}
+
+body {
+    min-width: 320px;
 }
 
 #menu-principal {
-    background-color: #f4f4f4;
-    padding: 15px;
+    background-color: #7b7b99;
+    padding: var(--var-padding10px);
     text-align: center;
+    color: var(--color-font-ligt);
+}
+
+#menu-principal h1 {
+    padding: var(--var-padding15px);
+    font-size: var(--font-sizeh1);
 }
 
 .menu-align {
     margin: 0 auto;
-    padding: 15px;
-    width: 900px;
+    padding: var(--var-padding15px);
+    max-width: 900px;
     display: flex;
     flex-direction: row;
-    flex-wrap: wrap;
+    justify-items: center;
     justify-content: center;
-<<<<<<< HEAD
-    gap: 15px;
-=======
->>>>>>> 03806914dcdade48a309a3069f7ba704f6f534ce
+    flex-wrap: wrap;
+    gap: 10px;
 
+
+    /* background-color: #f4f4f4; */
 }
 
-.menu-align label {
-    flex-grow: 2;
-<<<<<<< HEAD
-=======
-    margin: 10px;
+.menu-align .menu-principal__menu-align__search {
+    flex: 2;
+    min-width: 320px;
     padding: 5px;
->>>>>>> 03806914dcdade48a309a3069f7ba704f6f534ce
     text-align: left;
+    font-size: var(--font-sizeh4);
+    /* background-color: rgb(232, 253, 109); */
+}
+
+.menu-align .menu-principal__menu-align__itens-list {
+    flex: 1;
+    min-width: 320px;
+    padding: 5px;
+    text-align: left;
+    font-size: var(--font-sizeh4);
+    /* background-color: aqua; */
 }
 
 .menu-align input,
 select {
     width: 100%;
-    padding: 7px;
+    padding: 8px;
+    margin: 5px 0;
     border-radius: 5px;
     outline: none;
     border: 1px solid #333;
+    color: var(--color-font-dark);
 }
 
 #view-list {
@@ -50,14 +102,13 @@ select {
 }
 
 .item-view {
-    width: 900px;
     margin: 0 auto;
     margin-top: 10px;
     padding: 10px;
     background-color: #000000;
     border-radius: 5px;
     border: 1px solid #7b7b99;
-    color: #fff;
+    color: var(--color-font-ligt);
 }
 
 .item-view img {
