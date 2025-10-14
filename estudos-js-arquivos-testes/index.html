@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="pt-BR">
 
 <head>
@@ -10,7 +10,7 @@
 <body>
     <input type="text" id="nome" placeholder="Nome">
     <input type="number" id="idade" placeholder="Idade">
-    <!-- <input type="text" id="formacao" placeholder="Formação"> -->
+    <!-- <input type="text" id="formacao" placeholder="Formação"> 
     <select name="formacao" id="formacao">
         <option value="Ensino Fundamental Completo">Ensino Fundamental Completo</option>
         <option value="Ensino Médio Completo">Ensino Médio Completo</option>
@@ -27,6 +27,139 @@
     <div id="resultado"></div>
 
     <script src="estudos.js"></script>
+</body>
+
+</html> -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Conta Bancária</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        :root {
+            font: 100%/1.4 Poppins, sans-serif;
+        }
+
+        body {
+            width: min(100%, 30rem);
+            margin-inline: auto;
+            padding-block: 3em;
+
+            >*+* {
+                margin-top: 1.5em;
+            }
+
+            >* {
+                border-radius: 0.5em;
+                border: 1px solid #bbb;
+                background: #fff;
+                padding: 1.5em;
+            }
+        }
+
+        section>section {
+            margin-top: 1em;
+        }
+
+        button {
+            border: 1px solid #0070f3;
+            border-radius: 0.25em;
+            background-color: #0070f3;
+            color: #fff;
+            cursor: pointer;
+            font: inherit;
+            text-transform: uppercase;
+            padding: 0.5rem 1rem;
+            transition: all 0.3s ease-in-out;
+
+            &:hover {
+                background-color: #0061d9;
+            }
+        }
+
+        input {
+            border: 1px solid #bbb;
+            border-radius: 0.25em;
+            font: inherit;
+            padding: 0.25em 0.5em;
+        }
+
+        form {
+            display: grid;
+            gap: 1em;
+        }
+
+        section>form {
+            grid-template-columns: repeat(2, 1fr);
+
+            .field {
+                grid-column: span 2;
+            }
+        }
+
+        section ul {
+            list-style-position: inside;
+        }
+
+        .field {
+            display: grid;
+            gap: 0.5em;
+        }
+    </style>
+</head>
+
+<body>
+    <form method="post" id="account-form">
+        <div class="field">
+            <label for="name">Name</label>
+            <input type="text" id="name" name="name" />
+        </div>
+
+        <div class="field">
+            <label for="balance">Saldo inicial</label>
+            <input type="text" id="balance" name="balance" />
+        </div>
+
+        <button>Criar Conta</button>
+    </form>
+
+    <section id="account">
+        <h1>Informações da Conta</h1>
+        <p>Nome: <span id="account-name">---</span></p>
+        <p>Saldo: <span id="account-balance">R$ 0,00</span></p>
+    </section>
+
+    <section>
+        <h1>Operações</h1>
+
+        <form method="post" id="transaction-form">
+            <div class="field">
+                <label for="value">Valor</label>
+                <input type="number" id="value" name="value" />
+            </div>
+
+            <button name="operation" value="deposit">Depositar</button>
+            <button name="operation" value="withdraw">Sacar</button>
+        </form>
+
+        <section>
+            <h2>Extrato</h2>
+
+            <ul id="history">
+                <li>Depósito: R$ 0,00</li>
+                <li>Saque: R$ 0,00</li>
+            </ul>
+        </section>
+    </section>
+    <script src="banco.js"></script>
 </body>
 
 </html>

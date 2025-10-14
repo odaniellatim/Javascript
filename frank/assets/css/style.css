@@ -1,0 +1,405 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 16px;
+}
+
+.container {
+    width: 100%;
+    display: grid;
+    grid-template:
+        "menu main main main";
+    /* padding: 20px; */
+
+}
+
+/* CONFIGURAÇÃO MENU PRINCIPAL*/
+.container__menu {
+    grid-area: menu;
+    background-color: #B4C0D8;
+    height: calc(100vh - 40px);
+
+}
+
+.container__menu__logo {
+    margin-top: 71px;
+    text-align: center;
+    padding: 20px;
+}
+
+.container__menu__logo h1 {
+    font-size: 38px;
+    border-bottom: 1px solid rgba(45, 66, 113, 0.1);
+    padding-bottom: 5px;
+    color: #2D4271;
+}
+
+.container__menu__navigation {
+    padding: 20px;
+}
+
+.container__menu__navigation ul {
+    list-style: none;
+}
+
+.container__menu__navigation ul li a {
+    color: #2D4271;
+    text-decoration: none;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: start;
+    gap: 16px;
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 16px;
+}
+
+.container__menu__navigation ul li a:hover {
+    color: #1555DE;
+}
+
+.container__main {
+    grid-area: main;
+    background-color: #F4F4F4;
+}
+
+/* CONFIGURAÇÃO MENU MOBILE*/
+.container__menu__mobile {
+    display: none;
+}
+
+/* CONTEUDO PRINCIPAL*/
+.container__main {
+    padding: 22px;
+
+}
+
+/* HEADER SEARCH E NEW CADASTRO*/
+.container__main__header {}
+
+.container__main__header fieldset {
+    border: none;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 16px;
+    margin-top: 71px;
+}
+
+.container__main__header fieldset input {
+    border-radius: 5px;
+    border: 1px solid #C5C3C3;
+    padding: 13px 18px;
+    min-width: 320px;
+    color: #333;
+}
+
+.container__main__header fieldset button {
+    font-size: 20px;
+    font-weight: 600;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 16px;
+    padding: 10px 30px;
+    border: none;
+    background-color: #D6DEF2;
+    border-radius: 5px;
+    min-width: 150px;
+    justify-content: center;
+    color: #2D4271;
+    cursor: pointer;
+}
+
+.container__main__header fieldset button:hover {
+    background-color: #c4cce0;
+    ;
+}
+
+.container__main__header fieldset button img {
+    width: 29px;
+}
+
+/* CONFIGURAÇÃO POPUP CADASTRO*/
+.container__popup-cadatro {
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 16px;
+    display: none;
+}
+
+.container__popup-cadatro__cadastro {
+    max-width: 600px;
+    margin: 71px auto 0;
+    background-color: #D6DEF2;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 25px;
+    gap: 20px;
+    border-radius: 10px;
+}
+
+.container__popup-cadatro__header {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.container__popup-cadatro__cadastro h2 {
+    font-size: 32px;
+}
+
+.container__popup-cadatro__cadastro img {
+    width: 30px;
+    cursor: pointer;
+}
+
+.container__popup-cadatro__input {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.container__popup-cadatro__input input {
+    height: 45px;
+    padding: 13px 18px;
+    border: 1px solid #C5C3C3;
+    border-radius: 5px;
+}
+
+.container__popup-cadatro__input button {
+    background-color: #5063AF;
+    color: #FBFBFB;
+    font-weight: bold;
+    font-size: 20px;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 24px;
+    cursor: pointer;
+}
+
+/* CONFIGURAÇÃO TABELA LISTA DE ITEMS CADASTRADOS */
+.container__main__table {
+    display: flex;
+    flex-direction: column;
+    /* background-color: #B4C0D8; */
+    margin-top: 16px;
+
+}
+
+.container__main__table__header {
+    background-color: #D9D9D9;
+    display: grid;
+    justify-items: center;
+    align-items: center;
+    /* grid-template-areas:
+        "descricao qnt-borracha qnt-catalisador actions"; */
+    grid-template-columns: repeat(4, minmax(100px, 1fr));
+    gap: 10px;
+    padding: 10px 10px;
+    font-weight: bold;
+    text-transform: uppercase;
+    justify-items: center;
+    border-radius: 10px 10px 0 0;
+}
+
+
+
+.container__main__table__header__descricao {
+    /* flex: 2fr; */
+}
+
+.container__main__table__header__descricao {
+    /* grid-area: descricao; */
+}
+
+.container__main__table__header__qnt-borracha {
+    /* grid-area: qnt-borracha; */
+}
+
+.container__main__table__header__qnt-catalisador {
+    /* grid-area: qnt-catalisador; */
+}
+
+.container__main__table__header__actions {
+    /* grid-area: actions; */
+}
+
+.container__main__table__header__descricao,
+.container__main__table__header__qnt-borracha,
+.container__main__table__header__qnt-catalisador,
+.container__main__table__header__actions {
+    font-weight: bold;
+    font-size: 16px;
+    justify-self: center;
+}
+
+.container__main__table__info-items__item-found {
+    padding: 10px;
+    text-align: center;
+    color: #6b6b6b;
+    background-color: #ececec;
+}
+
+.container__main__table__info-items {
+    display: grid;
+    justify-items: center;
+    grid-template-columns: repeat(4, 1fr);
+    align-items: center;
+    padding: 5px 10px;
+    background-color: #ececec;
+}
+
+.container__main__table__info-items:last-child {
+    border-radius: 0 0 10px 10px;
+    padding-bottom: 5px;
+}
+
+.container__main__table__info-items__actions {
+    display: flex;
+    flex-direction: row;
+    gap: 16px;
+    align-items: flex-end;
+    justify-content: space-between;
+    justify-items: center;
+}
+
+.container__main__table__info-items__actions button {
+    border: none;
+    padding: 0;
+    margin: 0;
+    cursor: pointer;
+    text-align: center;
+    width: 40px;
+    position: relative;
+}
+
+.container__main__table__info-items__actions .btnEditar {
+    background-image: url(../img/editar.svg);
+    width: 30px;
+    height: 30px;
+    background-color: rgba(139, 138, 138, 0);
+}
+
+.container__main__table__info-items__actions .btnDeleta {
+    background-image: url(../img/deletar.svg);
+    width: 30px;
+    height: 30px;
+    background-color: rgba(139, 138, 138, 0);
+}
+
+.container__main__table__info-items__actions button img {
+    z-index: -1
+}
+
+/* RESPONSIVIDADE 768PX LARGURA*/
+@media (max-width: 768px) {
+    .container {
+        width: 100%;
+        display: grid;
+        grid-template:
+            "menu"
+            "main";
+    }
+
+    /* MENU DE NAVEGAÇÃO MOBILE*/
+    .container__menu {
+        height: auto;
+        display: none;
+    }
+
+    .container__menu__mobile {
+        grid-area: menu;
+        background-color: #B4C0D8;
+        height: auto;
+        margin: 0;
+        min-width: 320px;
+        display: inline-block;
+    }
+
+    .container__menu__logo {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 16px;
+        margin: 0;
+    }
+
+    .container__menu__logo a {
+        cursor: pointer;
+    }
+
+    .container__menu__logo h1 {
+        font-size: 32px;
+        color: #2D4271;
+        border-bottom: none;
+    }
+
+    .container__menu__navigation {
+        display: none;
+    }
+
+    .container__menu__navigation.active {
+        display: block;
+        border-top: 1px solid rgba(0, 0, 0, 0.1);
+    }
+
+    .container__menu__navigation.active ul li {
+        color: #2D4271;
+        text-decoration: none;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 16px;
+        font-size: 18px;
+        font-weight: 600;
+        margin-bottom: 16px;
+        transition: width 2s ease 1s;
+    }
+
+    /* HEADER COM BUSCA E CADASTRO DE ITEMS*/
+    .container__main__header fieldset {
+        margin-top: 24px;
+    }
+
+    .container__main__header fieldset input {
+        width: 100%;
+    }
+
+    .container__main__header fieldset button {
+        width: 100%;
+    }
+
+    /* CONFIGURAÇÃO POPUP CADASTRO*/
+    .container__popup-cadatro__cadastro {
+        min-width: 343px;
+
+    }
+
+    /* CONFIGURAÇÃO TABELA LISTA DE ITEMS CADASTRADOS*/
+    .container__main__table__header {
+        padding: 10px 5px;
+    }
+
+    .container__main__table__header__descricao,
+    .container__main__table__header__qnt-borracha,
+    .container__main__table__header__qnt-catalisador,
+    .container__main__table__header__actions {
+        font-weight: bold;
+        font-size: 13px;
+        justify-self: center;
+    }
+}

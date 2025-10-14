@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Multiplas Coisas</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+
+<body>
+
+    <div class="container">
+
+        <!-- MENU DESKTOP-->
+        <section class="container__menu">
+
+            <div class="container__menu__logo">
+                <h1>FK</h1>
+            </div>
+
+            <nav class="container__menu__navigation">
+
+                <ul class="mobile web">
+                    <li>
+                        <a href="index.html">
+                            <img src="assets/img/molde.svg">
+                            Calc Molde
+                        </a>
+                    </li>
+                    <li>
+                        <a href="../wartale/wartale-calculator-v2/index.html">
+                            <img src="assets/img/game.svg">
+                            Wartale
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+
+        </section>
+
+        <!-- MENU MOBILE -->
+        <section class="container__menu__mobile">
+
+            <div class="container__menu__logo">
+                <a id="btn-menu-mobile"">
+                    <img src=" assets/img/menu-mobile.svg">
+                </a>
+                <h1>FK</h1>
+            </div>
+
+            <nav id="menu-navigation" class="container__menu__navigation">
+
+                <ul class="mobile web">
+                    <li>
+                        <a href="index.html">
+                            <img src="assets/img/molde.svg">
+                            Calc Molde
+                        </a>
+                    </li>
+                    <li>
+                        <a href="../wartale/wartale-calculator-v2/index.html">
+                            <img src="assets/img/game.svg">
+                            Wartale
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+
+        </section>
+
+        <!-- POPUP DE CADASTRO DE ITEMS-->
+        <section class="container__popup-cadatro">
+
+            <div class="container__popup-cadatro__cadastro">
+
+                <div class=" container__popup-cadatro__header">
+                    <h2>Catalisador de Borrach</h2>
+                    <img id="btn-fechar" src="assets/img/btn-fechar.svg" title="fechar">
+                </div>
+
+                <div class="container__popup-cadatro__input">
+                    <input id="input-nome-molde" type="text" name="descricao-molde" placeholder="Nome do Molde">
+                    <input id="input-qnt-borracha" type="number" name="quantidade-borracha"
+                        placeholder="quantidade de Borracha em ml" required>
+                    <button id="btn-cadastrar-item">
+                        <img src="assets/img/add-item-light.svg">
+                        Calcular
+
+                    </button>
+                </div>
+
+            </div>
+
+        </section>
+
+        <main class="container__main">
+
+            <!-- HEADER COM BUSCA E CADASTRO DE ITEMS -->
+            <header class="container__main__header">
+
+                <fieldset>
+                    <input id="pesquisar-molde" type="search" placeholder="Pesquisar Formula Criada" />
+                    <button id="btn-cadastro">
+                        <img src="assets/img/add-item.svg">
+                        Calcular
+                    </button>
+                </fieldset>
+
+            </header>
+
+            <!-- TABELA LISTA DE ITEMS CADASTRADOS-->
+            <section class="container__main__table">
+
+                <header class="container__main__table__header">
+                    <div class="container__main__table__header__descricao">Molde</div>
+                    <div class="container__main__table__header__qnt-borracha">Borracha</div>
+                    <div class="container__main__table__header__qnt-catalisador">Catalisador</div>
+                    <div class="container__main__table__header__actions">Ação</div>
+                </header>
+
+                <div class="result-items-info">
+                    <!--<div class="container__main__table__info-items__descricao">
+                        Molde de Coração
+                    </div>
+                    <div class="container__main__table__info-items__qnt-borracha">100 ml</div>
+                    <div class="container__main__table__info-items__qnt-catalisador">3.0 ml</div>
+                    <div class="container__main__table__info-items__actions">
+                        <img src="assets/img/editar.svg" />
+                        <img src="assets/img/deletar.svg" />
+                    </div>-->
+                </div>
+
+            </section>
+
+        </main>
+
+    </div>
+    <script src="assets/js/menu-mobile.js"></script>
+    <script src="assets/js/script.js"></script>
+</body>
+
+
+
+
+</html>

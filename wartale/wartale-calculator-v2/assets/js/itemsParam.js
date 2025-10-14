@@ -192,7 +192,7 @@ itemsAttack.map((infoItem) => {
                             </tr>
                             <tr>
                                 <td>Price</td>
-                                <td>${infoItem.misc.price}</td>
+                                <td> $ ${infoItem.misc.price.toLocaleString("pt-BR")}</td>
                                 <td></td>
 
                             </tr>
@@ -205,7 +205,4 @@ itemsAttack.map((infoItem) => {
         
         `
     }
-
-
-
-})
+});
