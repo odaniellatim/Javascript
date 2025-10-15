@@ -10,13 +10,40 @@
 
 <body>
 
+
+
     <div class="container">
+
+        <!-- POPUP DE CADASTRO DE ITEMS-->
+        <section class="container__popup-cadatro">
+
+            <div class="container__popup-cadatro__cadastro">
+
+                <div class=" container__popup-cadatro__header">
+                    <h2>Catalisador de Borrach</h2>
+                    <img id="btn-fechar" src="assets/img/btn-fechar.svg" title="fechar">
+                </div>
+
+                <div class="container__popup-cadatro__input">
+                    <input id="input-nome-molde" type="text" name="descricao-molde" placeholder="Nome do Molde">
+                    <input id="input-qnt-borracha" type="number" name="quantidade-borracha"
+                        placeholder="quantidade de Borracha em ml" required>
+                    <button id="btn-cadastrar-item">
+                        <img src="assets/img/add-item-light.svg">
+                        Calcular
+
+                    </button>
+                </div>
+
+            </div>
+
+        </section>
 
         <!-- MENU DESKTOP-->
         <section class="container__menu">
 
             <div class="container__menu__logo">
-                <h1>FK</h1>
+                <h1>FRANK</h1>
             </div>
 
             <nav class="container__menu__navigation">
@@ -69,58 +96,34 @@
 
         </section>
 
-        <!-- POPUP DE CADASTRO DE ITEMS-->
-        <section class="container__popup-cadatro">
-
-            <div class="container__popup-cadatro__cadastro">
-
-                <div class=" container__popup-cadatro__header">
-                    <h2>Catalisador de Borrach</h2>
-                    <img id="btn-fechar" src="assets/img/btn-fechar.svg" title="fechar">
-                </div>
-
-                <div class="container__popup-cadatro__input">
-                    <input id="input-nome-molde" type="text" name="descricao-molde" placeholder="Nome do Molde">
-                    <input id="input-qnt-borracha" type="number" name="quantidade-borracha"
-                        placeholder="quantidade de Borracha em ml" required>
-                    <button id="btn-cadastrar-item">
-                        <img src="assets/img/add-item-light.svg">
-                        Calcular
-
-                    </button>
-                </div>
-
-            </div>
-
-        </section>
-
         <main class="container__main">
+            <div class="alinhamento-conteudo">
 
-            <!-- HEADER COM BUSCA E CADASTRO DE ITEMS -->
-            <header class="container__main__header">
+                <!-- HEADER COM BUSCA E CADASTRO DE ITEMS -->
+                <header class="container__main__header">
 
-                <fieldset>
-                    <input id="pesquisar-molde" type="search" placeholder="Pesquisar Formula Criada" />
-                    <button id="btn-cadastro">
-                        <img src="assets/img/add-item.svg">
-                        Calcular
-                    </button>
-                </fieldset>
+                    <fieldset>
+                        <input id="pesquisar-molde" type="search" placeholder="Pesquisar Formula Criada" />
+                        <button id="btn-cadastro">
+                            <img src="assets/img/add-item.svg">
+                            Calcular
+                        </button>
+                    </fieldset>
 
-            </header>
-
-            <!-- TABELA LISTA DE ITEMS CADASTRADOS-->
-            <section class="container__main__table">
-
-                <header class="container__main__table__header">
-                    <div class="container__main__table__header__descricao">Molde</div>
-                    <div class="container__main__table__header__qnt-borracha">Borracha</div>
-                    <div class="container__main__table__header__qnt-catalisador">Catalisador</div>
-                    <div class="container__main__table__header__actions">Ação</div>
                 </header>
 
-                <div class="result-items-info">
-                    <!--<div class="container__main__table__info-items__descricao">
+                <!-- TABELA LISTA DE ITEMS CADASTRADOS-->
+                <section class="container__main__table">
+
+                    <header class="container__main__table__header">
+                        <div class="container__main__table__header__descricao">Molde</div>
+                        <div class="container__main__table__header__qnt-borracha">Borracha</div>
+                        <div class="container__main__table__header__qnt-catalisador">Catalisador</div>
+                        <div class="container__main__table__header__actions">Ação</div>
+                    </header>
+
+                    <div class="result-items-info">
+                        <!--<div class="container__main__table__info-items__descricao">
                         Molde de Coração
                     </div>
                     <div class="container__main__table__info-items__qnt-borracha">100 ml</div>
@@ -129,10 +132,10 @@
                         <img src="assets/img/editar.svg" />
                         <img src="assets/img/deletar.svg" />
                     </div>-->
-                </div>
+                    </div>
 
-            </section>
-
+                </section>
+            </div>
         </main>
 
     </div>

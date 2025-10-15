@@ -10,7 +10,8 @@
     width: 100%;
     display: grid;
     grid-template:
-        "menu main main main";
+        "menu main";
+    grid-template-columns: minmax(200px, 350px) repeat(1, minmax(320px, 100%));
     /* padding: 20px; */
 
 }
@@ -64,6 +65,11 @@
 .container__main {
     grid-area: main;
     background-color: #F4F4F4;
+}
+
+.container__main .alinhamento-conteudo {
+    max-width: 1024px;
+    margin: 0 auto;
 }
 
 /* CONFIGURAÇÃO MENU MOBILE*/
@@ -133,6 +139,7 @@
     background-color: rgba(0, 0, 0, 0.5);
     padding: 16px;
     display: none;
+    z-index: 1;
 }
 
 .container__popup-cadatro__cadastro {
@@ -310,8 +317,7 @@
     .container {
         width: 100%;
         display: grid;
-        grid-template:
-            "menu"
+        grid-template: "menu"
             "main";
     }
 
@@ -384,8 +390,18 @@
     }
 
     /* CONFIGURAÇÃO POPUP CADASTRO*/
+    .container__popup-cadatro {
+        padding: 5px;
+        width: 100%;
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+    }
+
     .container__popup-cadatro__cadastro {
-        min-width: 343px;
+        min-width: 420x;
 
     }
 
