@@ -1,13 +1,12 @@
 import { itemsAttack } from "./bd.js"
+import { selectElement } from "./calc-item.js";
 
 const queryString = window.location.search;
 const params = new URLSearchParams(queryString);
 
 const id = Number(params.get('id'));
-
 const container = document.querySelector(".container-item-info_card");
 
-console.log(id)
 
 itemsAttack.map((infoItem) => {
 
@@ -82,17 +81,17 @@ itemsAttack.map((infoItem) => {
                         <tbody>
                             <tr>
                                 <td>Min Damage</td>
-                                <td>${infoItem.base_status.min_demage[0]} - ${infoItem.base_status.min_demage[1]}</td>
+                                <td class="min-demage">${infoItem.base_status.min_demage[0]} - ${infoItem.base_status.min_demage[1]}</td>
                                 <td>
-                                    <input type="number" placeholder="Insira o valor do item">
+                                    <input id="input-min-demage" type="number" placeholder="Insira o valor do item" min="${infoItem.base_status.min_demage[0]}" max="${infoItem.base_status.min_demage[1]}">
                                 </td>
 
                             </tr>
                             <tr>
                                 <td>Max Damage</td>
-                                <td>${infoItem.base_status.max_demage[0]} - ${infoItem.base_status.max_demage[1]}</td>
+                                <td class="max-demage">${infoItem.base_status.max_demage[0]} - ${infoItem.base_status.max_demage[1]}</td>
                                 <td>
-                                    <input type="number" placeholder="Insira o valor do item">
+                                    <input id="input-max-demage" type="number" placeholder="Insira o valor do item" min="${infoItem.base_status.max_demage[0]}" max="${infoItem.base_status.max_demage[1]}">
                                 </td>
 
                             </tr>
@@ -206,3 +205,63 @@ itemsAttack.map((infoItem) => {
         `
     }
 });
+
+const calc = selectElement();
+const { tdMinValue, tdMaxValue, inputMinValue, inputMaxValue } = calc;
+// const danoItemMin = tdMinValue.innerText.trim().split(" - ");
+
+
+function danoItemSplit(valorDanoItem) {
+    const danoItem = valorDanoItem.innerText.trim().split(" - ");
+    return danoItem;
+}
+
+const danoMinItem = danoItemSplit(tdMinValue)
+const danoMaxItem = danoItemSplit(tdMaxValue)
+
+function CalculaDanoItem(ElementHtml, danoItemBD, danoItemInput) {
+
+    ElementHtml.style.color = "";
+    const result = parseInt(danoItemInput.value) - parseInt(danoItemBD[1]);
+
+    if (result < 0) {
+        ElementHtml.style.color = "red";
+        ElementHtml.innerHTML = String(result);
+    } else {
+        ElementHtml.style.color = "green";
+        ElementHtml.innerHTML = String(result);
+    }
+
+    return result
+}
+
+function errorCampoVazio(selecaoImput) {
+    selecaoImput.style.borderColor = "red";
+}
+
+document.addEventListener("change", (e) => {
+
+
+    if (e.target.id == "input-min-demage") {
+
+        if (e.target.value == "") {
+            errorCampoVazio(inputMinValue)
+
+            return
+        }
+
+        CalculaDanoItem(tdMinValue, danoMinItem, inputMinValue)
+
+    }
+    if (e.target.id == "input-max-demage") {
+
+        if (e.target.value == "") {
+            errorCampoVazio(inputMaxValue)
+
+            return
+        }
+
+        CalculaDanoItem(tdMaxValue, danoMaxItem, inputMaxValue);
+    }
+
+})

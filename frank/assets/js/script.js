@@ -237,4 +237,4 @@ function init() {
     }
 }
 
-init()
+init();
