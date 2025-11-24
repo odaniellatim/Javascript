@@ -9,7 +9,6 @@ const container = document.querySelector(".container-item-info_card");
 
 
 itemsAttack.map((infoItem) => {
-
     if (infoItem.id === id) {
         container.innerHTML = `
         
@@ -210,15 +209,17 @@ const calc = selectElement();
 const { tdMinValue, tdMaxValue, inputMinValue, inputMaxValue } = calc;
 // const danoItemMin = tdMinValue.innerText.trim().split(" - ");
 
-
+//Funcao que transforma o texto do html em array e remove os espaços para ser usado no calculo.
 function danoItemSplit(valorDanoItem) {
     const danoItem = valorDanoItem.innerText.trim().split(" - ");
     return danoItem;
 }
 
+//instacia da funcao que separa os valores do html e transforma em array.
 const danoMinItem = danoItemSplit(tdMinValue)
 const danoMaxItem = danoItemSplit(tdMaxValue)
 
+// funcao que cria a logica e faz o calculo do valor do item e apresenta no html.
 function CalculaDanoItem(ElementHtml, danoItemBD, danoItemInput) {
 
     ElementHtml.style.color = "";
@@ -231,37 +232,29 @@ function CalculaDanoItem(ElementHtml, danoItemBD, danoItemInput) {
         ElementHtml.style.color = "green";
         ElementHtml.innerHTML = String(result);
     }
-
     return result
 }
 
+//Altera o css do campo colocando uma borda vermelha
 function errorCampoVazio(selecaoImput) {
     selecaoImput.style.borderColor = "red";
 }
 
+//Ativa o evento de mundaça nos campos do documento.
 document.addEventListener("change", (e) => {
 
-
     if (e.target.id == "input-min-demage") {
-
         if (e.target.value == "") {
             errorCampoVazio(inputMinValue)
-
             return
         }
-
         CalculaDanoItem(tdMinValue, danoMinItem, inputMinValue)
-
     }
     if (e.target.id == "input-max-demage") {
-
         if (e.target.value == "") {
             errorCampoVazio(inputMaxValue)
-
             return
         }
-
         CalculaDanoItem(tdMaxValue, danoMaxItem, inputMaxValue);
     }
-
 })
