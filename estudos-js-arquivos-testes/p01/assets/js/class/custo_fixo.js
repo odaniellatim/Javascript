@@ -20,15 +20,4 @@ export class Custo_fixo extends Lista_items {
     custo_fixo_total_dias() {
         return this.durabilidade * 30
     }
-
-
-    get_json() {
-        return {
-            "id": this.id,
-            "nome": this.nome,
-            "valor": this.valor,
-            "status": this.status,
-            "durabilidade": this.durabilidade,
-        }
-    }
 }
