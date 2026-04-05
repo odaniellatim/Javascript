@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset='utf-8'>
+  <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+  <title>Página de Teste JS</title>
+  <meta name='viewport' content='width=device-width, initial-scale=1'>
+  <!-- <link rel='stylesheet' type='text/css' media='screen' href='main.css'> -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+
+  <style>
+    .h500 {
+      height: 500px;
+    }
+
+    .h100 {
+      height: 100px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <nav class="navbar bg-body-tertiary">
+    <div class="container-fluid ">
+      <a class="navbar-brand " href="#">
+        <!-- <img src="/docs/5.3/assets/brand/bootstrap-logo.svg" alt="Logo" width="30" height="24" class="d-inline-block align-text-top"> -->
+        Calculadora Digital
+      </a>
+    </div>
+  </nav>
+
+  <div class="container-fluid">
+    <div class="row justify-content-center">
+
+      <!-- MENU PRINCIPAL-->
+      <div class="col-12 col-md-3 bg-light align-items-center">
+        <div class="list-group list-group-flush mt-4 ">
+          <li id="menu-home" class="list-group-item bg-transparent text-md-end">Página Inicial</li>
+          <li id="menu-orcamento-final" class="list-group-item bg-transparent text-md-end">Orçamento final</li>
+          <li id="menu-mao-de-obra" class="list-group-item bg-transparent text-md-end">Mão de obra</li>
+          <li id="menu-lista-materiais" class="list-group-item bg-transparent text-md-end">Lista de materiais</li>
+          <li id="menu-custo-fixo" class="list-group-item bg-transparent text-md-end">Custo fixo</li>
+          <li id="menu-renda-mensal" class="list-group-item bg-transparent text-md-end">Renda mensal</li>
+        </div>
+
+      </div>
+
+      <!-- Tela principal com os principais dados de orçamentos gerados-->
+      <div id="home" class="col-12 col-md-9 h500">
+        <h2 class="fs-4 text-center mt-3"> Seja bem vindo: Aqui está um resumo geral</h2>
+      </div>
+
+      <!-- CONTEUDO PRINCIPAL ORÇAMENTO FINAL-->
+      <div id="orcamento-final" class="col-12 col-md-9 h500">
+        <h1 class="fs-4 text-center mt-3">Orçamento Final</h1>
+      </div>
+
+      <!-- CONTEUDO PRINCIPAL MÃO DE OBRA-->
+      <div id="mao-de-obra" class="col-12 col-md-9 h500">
+        <h2 class="fs-4 text-center mt-3"> Configuração da Mão de Obra</h2>
+      </div>
+
+      <!-- CONTEUDO PRINCIPAL LISTA DE MATERIAIS-->
+      <div id="lista-materiais" class="col-12 col-md-9 h500">
+        <h2 class="fs-4 text-center mt-3"> Lista de Materiais cadastrados</h2>
+      </div>
+
+      <!-- CONTEUDO PRINCIPAL CUSTO FIXO -->
+      <div id="custo-fixo" class="col-12 col-md-9">
+
+        <div class="row p-2">
+          <div class="col-12 col-sm-6 mb-2">
+            <button id="btn-add-custo-fixo" class="btn btn-primary w-100">Adicionar Custo Fixo</button>
+          </div>
+          <div class="col-12 col-sm-6">
+            <button id="btn-listar-custo-fixo" class="btn btn-outline-secondary w-100">Listar Custo Fixo</button>
+          </div>
+        </div>
+
+        <!-- CUSTO FIXO LISTA DE ITEMS-->
+        <div id="listar-custo-fixo" class="row mt-2">
+
+          <div class="row">
+            <div class="col mb-2">
+              <h2 class="fs-4 text-center mt-3">Lista de itens Custo Fixo: (8)</h2>
+            </div>
+          </div>
+
+          <div class="row justify-content-center gap-2 p-2">
+            <div id="valor-total-custo-fixo" class="col-12 col-sm-4 p-3 fw-bold text-danger border">
+              TOTAL CUSTO FIXO: R$ 00,00
+            </div>
+            <div id="valor-medio-custo-fixo" class="col-12 col-sm-4 p-3 fw-bold text-primary border">
+              TOTAL MENSAL: R$ 00,00
+            </div>
+          </div>
+
+
+          <div class="col">
+            <table class="table table-striped">
+              <thead class="table-primary">
+                <tr>
+                  <th scope="col">Nome</th>
+                  <th scope="col">Valor</th>
+                  <th scope="col">Status</th>
+                  <th scope="col" class="d-none d-md-table-cell">Durabilidade (meses)</th>
+                  <th scope="col">Ações</th>
+                </tr>
+              </thead>
+              <tbody id="tbody-custo-fixo">
+                <!-- <tr>
+                  <th>Conta Luz</th>
+                  <td>R$ 250</td>
+                  <td>pendente</td>
+                  <td class="d-none d-md-table-cell">1</td>
+                  <td>Editar</td>
+                </tr>
+                <tr>
+                  <th>Conta Água</th>
+                  <td>R$ 120</td>
+                  <td>pendente</td>
+                  <td class="d-none d-md-table-cell">1</td>
+                  <td>Editar</td>
+                </tr>
+                <tr>
+                  <th>Conta Telefone</th>
+                  <td>R$ 250</td>
+                  <td>pendente</td>
+                  <td class="d-none d-md-table-cell">1</td>
+                  <td>Editar</td>
+                </tr>
+                <tr>
+                  <th>Celular</th>
+                  <td>R$ 3.999,99</td>
+                  <td>pendente</td>
+                  <td class="d-none d-md-table-cell">1</td>
+                  <td>Editar</td>
+                </tr>
+                <tr>
+                  <th>Computador</th>
+                  <td>R$ 5.350,00</td>
+                  <td>pendente</td>
+                  <td class="d-none d-md-table-cell">1</td>
+                  <td>Editar</td>
+                </tr>
+                <tr>
+                  <th>Geladeira</th>
+                  <td>R$ 4.500,00</td>
+                  <td>pendente</td>
+                  <td class="d-none d-md-table-cell">1</td>
+                  <td>Editar</td>
+                </tr> -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Cadastro de novos custos fixos-->
+        <div id="cadastro-custo-fixo" class="m-2 m-sm-3 m-md-4 d-none">
+          <h2 class="text-center">Cadastrar Novo Custo Fixo</h2>
+          <div class="row row-cols-auto">
+            <div class="col-12 col-md-6">
+              <div class="mb-3">
+                <label for="input-nome" class="form-label ">Nome da despesa</label>
+                <input type="text" class="form-control form-nome-custo-fixo" id="input-nome"
+                  aria-describedby="nome da despesa">
+                <div id="input-nome" class="form-text">Informe o nome da despesa</div>
+              </div>
+            </div>
+            <div class="col-12 col-md-6">
+              <div class="mb-3">
+                <label for="input-valor" class="form-label">Valor da despesa</label>
+                <input type="number" class="form-control form-valor-custo-fixo" id="input-valor"
+                  aria-describedby="valor da despesa">
+                <div id="input-despesa" class="form-text">Informe o valor da despesa</div>
+              </div>
+            </div>
+            <div class="col-12 col-md-6">
+              <div class="mb-3">
+                <label for="input-status" class="form-label">Selecione um status</label>
+                <select class="form-select form-status-custo-fixo" aria-label="Selecione o status de pagamento">
+                  <option selected>Selecione uma das opções:</option>
+                  <option value="pendente">Pendente</option>
+                  <option value="pago">Pago</option>
+                </select>
+                <div id="input-despesa" class="form-text">Informe o status do pagamento da despesa.</div>
+              </div>
+            </div>
+            <div class="col-12 col-md-6">
+              <div class="mb-3">
+                <label for="input-durabilidade" class="form-label">Durabilidade (Meses)</label>
+                <input type="number" class="form-control form-durabilidade-custo-fixo" id="input-durabilidade"
+                  aria-describedby="durabilidade da despesa em meses">
+                <div id="input-durabilidade" class="form-text">Informe a durabilidade da despesa em meses.</div>
+              </div>
+            </div>
+            <div class="col-12 ">
+              <button id="cadastrar-custo-fixo" class="btn btn-primary">
+                Cadastrar Custo Fixo
+              </button>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+      <!-- CONTEUDO PRINCIPAL RENDA MENSAL-->
+      <div id="renda-mensal" class="col-12 col-md-9 h500">
+        <h2 class="fs-4 text-center mt-3"> Configurações da Renda Mensal</h2>
+      </div>
+
+      <!-- FOOTER -->
+      <div class="row">
+        <div class="col-12 col-md-12 text-bg-dark text-center h100">FOOTER</div>
+      </div>
+
+      <script type="module" src="assets/js/custo-fixo/ui_elements_custo_fixo.js"></script>
+      <script type="module" src="assets/js/index.js"></script>
+      <script type="module" src="assets/js/ui/ui_menu.js" <script
+        src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" "></script>
+</body>
+
+</html>

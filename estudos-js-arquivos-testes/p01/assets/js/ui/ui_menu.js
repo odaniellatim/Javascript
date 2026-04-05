@@ -1,0 +1,118 @@
+const menuHome = document.querySelector("#menu-home")
+const menuOrcamentoFinal = document.querySelector("#menu-orcamento-final")
+const menuMaoDeObra = document.querySelector("#menu-mao-de-obra")
+const menuListaMateriais = document.querySelector("#menu-lista-materiais")
+const menuCustoFixo = document.querySelector("#menu-custo-fixo")
+const menuRendaMensal = document.querySelector("#menu-renda-mensal")
+
+const cHome = document.querySelector("#home")
+const cOrcamentoFinal = document.querySelector("#orcamento-final")
+const cMaoDeObra = document.querySelector("#mao-de-obra")
+const cListaMateriais = document.querySelector("#lista-materiais")
+const cCustoFixo = document.querySelector("#custo-fixo")
+const cRendaMensal = document.querySelector("#renda-mensal")
+
+
+cOrcamentoFinal.classList.add("d-none")
+cMaoDeObra.classList.add("d-none")
+cListaMateriais.classList.add("d-none")
+cCustoFixo.classList.add("d-none")
+cRendaMensal.classList.add("d-none")
+
+menuHome.classList.add("list-group-item-danger")
+
+menuHome.addEventListener("click", () => {
+    cHome.classList.remove("d-none")
+    cOrcamentoFinal.classList.add("d-none")
+    cMaoDeObra.classList.add("d-none")
+    cListaMateriais.classList.add("d-none")
+    cCustoFixo.classList.add("d-none")
+    cRendaMensal.classList.add("d-none")
+
+    menuHome.classList.add("list-group-item-danger")
+    menuOrcamentoFinal.classList.remove("list-group-item-danger")
+    menuMaoDeObra.classList.remove("list-group-item-danger")
+    menuListaMateriais.classList.remove("list-group-item-danger")
+    menuCustoFixo.classList.remove("list-group-item-danger")
+    menuRendaMensal.classList.remove("list-group-item-danger")
+})
+
+menuOrcamentoFinal.addEventListener("click", () => {
+    cHome.classList.add("d-none")
+    cOrcamentoFinal.classList.remove("d-none")
+    cMaoDeObra.classList.add("d-none")
+    cListaMateriais.classList.add("d-none")
+    cCustoFixo.classList.add("d-none")
+    cRendaMensal.classList.add("d-none")
+
+    menuHome.classList.remove("list-group-item-danger")
+    menuOrcamentoFinal.classList.add("list-group-item-danger")
+    menuMaoDeObra.classList.remove("list-group-item-danger")
+    menuListaMateriais.classList.remove("list-group-item-danger")
+    menuCustoFixo.classList.remove("list-group-item-danger")
+    menuRendaMensal.classList.remove("list-group-item-danger")
+})
+
+menuMaoDeObra.addEventListener("click", () => {
+    cHome.classList.add("d-none")
+    cOrcamentoFinal.classList.add("d-none")
+    cMaoDeObra.classList.remove("d-none")
+    cListaMateriais.classList.add("d-none")
+    cCustoFixo.classList.add("d-none")
+    cRendaMensal.classList.add("d-none")
+
+    menuHome.classList.remove("list-group-item-danger")
+    menuOrcamentoFinal.classList.remove("list-group-item-danger")
+    menuMaoDeObra.classList.add("list-group-item-danger")
+    menuListaMateriais.classList.remove("list-group-item-danger")
+    menuCustoFixo.classList.remove("list-group-item-danger")
+    menuRendaMensal.classList.remove("list-group-item-danger")
+})
+
+menuListaMateriais.addEventListener("click", () => {
+    cHome.classList.add("d-none")
+    cOrcamentoFinal.classList.add("d-none")
+    cMaoDeObra.classList.add("d-none")
+    cListaMateriais.classList.remove("d-none")
+    cCustoFixo.classList.add("d-none")
+    cRendaMensal.classList.add("d-none")
+
+    menuHome.classList.remove("list-group-item-danger")
+    menuOrcamentoFinal.classList.remove("list-group-item-danger")
+    menuMaoDeObra.classList.remove("list-group-item-danger")
+    menuListaMateriais.classList.add("list-group-item-danger")
+    menuCustoFixo.classList.remove("list-group-item-danger")
+    menuRendaMensal.classList.remove("list-group-item-danger")
+})
+
+menuCustoFixo.addEventListener("click", () => {
+    cHome.classList.add("d-none")
+    cOrcamentoFinal.classList.add("d-none")
+    cMaoDeObra.classList.add("d-none")
+    cListaMateriais.classList.add("d-none")
+    cCustoFixo.classList.remove("d-none")
+    cRendaMensal.classList.add("d-none")
+
+    menuHome.classList.remove("list-group-item-danger")
+    menuOrcamentoFinal.classList.remove("list-group-item-danger")
+    menuMaoDeObra.classList.remove("list-group-item-danger")
+    menuListaMateriais.classList.remove("list-group-item-danger")
+    menuCustoFixo.classList.add("list-group-item-danger")
+    menuRendaMensal.classList.remove("list-group-item-danger")
+})
+
+menuRendaMensal.addEventListener("click", () => {
+    cHome.classList.add("d-none")
+    cOrcamentoFinal.classList.add("d-none")
+    cMaoDeObra.classList.add("d-none")
+    cListaMateriais.classList.add("d-none")
+    cCustoFixo.classList.add("d-none")
+    cRendaMensal.classList.remove("d-none")
+
+    menuHome.classList.remove("list-group-item-danger")
+    menuOrcamentoFinal.classList.remove("list-group-item-danger")
+    menuMaoDeObra.classList.remove("list-group-item-danger")
+    menuListaMateriais.classList.remove("list-group-item-danger")
+    menuCustoFixo.classList.remove("list-group-item-danger")
+    menuRendaMensal.classList.add("list-group-item-danger")
+})
