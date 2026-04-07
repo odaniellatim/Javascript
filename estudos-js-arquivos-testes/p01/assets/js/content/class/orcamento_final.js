@@ -1,4 +1,4 @@
-import { setBD_GERAL_SYSTEM } from "../app.js"
+import { BD_GERAL_SYSTEM, setBD_GERAL_SYSTEM } from "../bd/bd_global.js"
 import { Custo_fixo } from "./custo_fixo.js"
 import { Local_storage } from "./localstorage.js"
 
@@ -47,7 +47,22 @@ export class Orcamento_final {
         Local_storage.saveLocalStorage("custo_fixo", this.custoFixo)
 
         return this.custoFixo
+    }
 
+    atualizarDadosCustoFixo(id, newNome, newValor, newStatus, newDurabilidade) {
+        console.log(id, newNome, newValor, newStatus, newDurabilidade)
+
+        const updateCF = BD_GERAL_SYSTEM.filter((value) => value.id !== Number(id))
+        this.custoFixo = updateCF
+        this.custoFixo.push({
+            id: Number(id),
+            nome: newNome,
+            valor: Number(newValor),
+            status: newStatus,
+            durabilidade: Number(newDurabilidade),
+        })
+        setBD_GERAL_SYSTEM(this.custoFixo)
+        Local_storage.saveLocalStorage("custo_fixo", this.custoFixo)
     }
 
     getObjCustoFixo() {

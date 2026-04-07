@@ -72,6 +72,7 @@
       <!-- CONTEUDO PRINCIPAL CUSTO FIXO -->
       <div id="custo-fixo" class="col-12 col-md-9">
 
+        <!-- Titulo pagina custo fixo-->
         <div class="row">
           <div class="col mb-2">
             <h2 class="fs-4 text-center mt-3">
@@ -81,27 +82,30 @@
           </div>
         </div>
 
-        <div class="row p-2">
-          <div class="col-12 col-sm-6 mb-2">
-            <button id="btn-add-custo-fixo" class="btn btn-primary w-100">Adicionar Custo Fixo</button>
+        <!-- Detaque dos valores de custo total e por projeto-->
+        <div class="row justify-content-center p-2 gap-2 text-center">
+
+          <div id="valor-total-custo-fixo" class="col-12 col-md fw-bold text-bg-warning p-4">
+            TOTAL CUSTO FIXO: R$ 00,00
           </div>
-          <div class="col-12 col-sm-6">
-            <button id="btn-listar-custo-fixo" class="btn btn-outline-secondary w-100">Listar Custo Fixo</button>
+          <div id="valor-medio-custo-fixo" class="col-12 col-md fw-bold text-bg-success p-4">
+            TOTAL MENSAL: R$ 00,00
+          </div>
+
+        </div>
+
+        <!-- Detaque dos valores de custo total e por projeto-->
+        <div class="d-flex flex-column flex-md-row bg-light justify-content-between mt-4 p-2">
+          <div class="p-2">
+            <button id="btn-add-custo-fixo" class="btn ps-2 pe-2 btn-primary">Adicionar custo</button>
+            <button id="btn-listar-custo-fixo" class="btn ps-2 pe-2 btn-outline-secondary">Visualizar custos</button>
+          </div>
+          <div class="p-2 flex-grow-1">
+            <input id="input-search-custo-fixo" type="search" class="form-control" placeholder="Pesquisar item" />
           </div>
         </div>
 
-        <!-- CUSTO FIXO LISTA DE ITEMS-->
         <div id="listar-custo-fixo" class="row mt-2">
-
-          <div class="d-flex-12 d-md-flex mb-2 gap-2">
-            <div id="valor-total-custo-fixo" class="col-12 col-md p-2 fw-bold text-center text-danger border">TOTAL
-              CUSTO FIXO: R$ 00,00
-            </div>
-            <div id="valor-medio-custo-fixo" class="col-12 col-md p-2 fw-bold text-center text-primary border">TOTAL
-              MENSAL: R$ 00,00
-            </div>
-          </div>
-
 
           <div class="col">
             <table class="table table-striped">
@@ -116,7 +120,7 @@
                 </tr>
               </thead>
               <tbody id="tbody-custo-fixo" class="text-center">
-
+                <!-- Elementos adicionado via js-->
               </tbody>
             </table>
           </div>
@@ -170,6 +174,55 @@
 
         </div>
 
+        <!-- Atualizar os contatos existente-->
+        <div id="update-custo-fixo" class="m-2 m-sm-3 m-md-4 d-none">
+          <h2 class="text-center">Cadastrar Novo Custo Fixo</h2>
+          <div class="row row-cols-auto">
+            <div class="col-12 col-md-6">
+              <div class="mb-3">
+                <label for="update-input-nome" class="form-label ">Nome da despesa</label>
+                <input type="text" class="form-control form-nome-custo-fixo" id="update-input-nome"
+                  aria-describedby="nome da despesa">
+                <div id="update-input-nome" class="form-text">Informe o nome da despesa</div>
+              </div>
+            </div>
+            <div class="col-12 col-md-6">
+              <div class="mb-3">
+                <label for="update-input-valor" class="form-label">Valor da despesa</label>
+                <input type="number" class="form-control form-valor-custo-fixo" id="update-input-valor"
+                  aria-describedby="valor da despesa">
+                <div id="update-input-valor" class="form-text">Informe o valor da despesa</div>
+              </div>
+            </div>
+            <div class="col-12 col-md-6">
+              <div class="mb-3">
+                <label for="update-input-status-custo-fixo" class="form-label">Selecione o status de pagamento</label>
+                <select class="form-select update-input-status-custo-fixo" aria-label="Selecione o status de pagamento">
+                  <option selected>Selecione uma das opções:</option>
+                  <option value="pendente">Pendente</option>
+                  <option value="pago">Pago</option>
+                </select>
+                <div id="update-input-status-despesa" class="form-text">Informe o status do pagamento da despesa.</div>
+              </div>
+            </div>
+            <div class="col-12 col-md-6">
+              <div class="mb-3">
+                <label for="update-input-durabilidade" class="form-label">Durabilidade (Meses)</label>
+                <input type="number" class="form-control form-durabilidade-custo-fixo" id="update-input-durabilidade"
+                  aria-describedby="durabilidade da despesa em meses">
+                <div id="update-input-durabilidade" class="form-text">Informe a durabilidade da despesa em meses.</div>
+              </div>
+            </div>
+            <div class="col-12 ">
+              <input id="id-custo-fixo" type="hidden" value="" />
+              <button id="btn-atualizar-custo-fixo" class="btn btn-primary">
+                Atualizar Custo Fixo
+              </button>
+            </div>
+          </div>
+
+        </div>
+
       </div>
 
       <!-- CONTEUDO PRINCIPAL RENDA MENSAL-->
@@ -179,15 +232,13 @@
 
     </div>
 
-  </div>
+    <!-- FOOTER -->
+    <div class="container-fluid">
+      <div class="col text-bg-dark text-center h100">FOOTER</div>
+    </div>
 
-  <!-- FOOTER -->
-  <div class="container-fluid">
-    <div class="col text-bg-dark text-center h100">FOOTER</div>
-  </div>
-
-  <script type="module" src="assets/js/index.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" "></script>
+    <script type="module" src="assets/js/index.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" "></script>
 </body>
 
 </html>

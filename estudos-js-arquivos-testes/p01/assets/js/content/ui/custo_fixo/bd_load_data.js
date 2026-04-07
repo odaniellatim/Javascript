@@ -1,4 +1,5 @@
-import { BD_GERAL_SYSTEM, Local_storage, addCustoFixo, realoadInterface } from "../../app.js"
+import { Local_storage } from "../../class/localstorage.js"
+import { addCustoFixo, realoadInterface } from "../../functions/functions_custo_fixo.js"
 
 export function loadItemsLocaStorageCustoFixo(data_type) {
 
