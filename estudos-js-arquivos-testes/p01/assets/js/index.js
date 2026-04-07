@@ -1,39 +1,35 @@
-import { addCustoFixo, totalMedia, resetarInputCadastroCustoFixo, inputNomeCustoFixo, inputValorCustoFixo, inputStatusCustoFixo, inputDurabilidadeCustoFixo, addItemsTabela, tbodyCustoFixo, removerCustoFixoTabela, DATA, DATA_CUSTO_FIXO } from "./functions/functions.js"
+import { addItemsTabelaCustoFixo, tbodyCustoFixo, addCustoFixo, inputNomeCustoFixo, inputValorCustoFixo, inputStatusCustoFixo, inputDurabilidadeCustoFixo, resetarInputCadastroCustoFixo, removerCustoFixoTabela, btnAddCustoFixo, loadItemsLocaStorageCustoFixo, Local_storage, BD_GERAL_SYSTEM, totalItemCustoFixo, totalMedia, realoadInterface } from "./content/app.js"
 
-// Verifica se tem itens salvos na variavel DATA_CUSTO_FIXO
-addItemsTabela()
-
-//Adiciona os items custo fixo cadastrado na variavel global
-DATA()
-
-// Seleção do Botão de cadastro
-const btnAddCustoFixo = document.querySelector("#cadastrar-custo-fixo")
+loadItemsLocaStorageCustoFixo("custo_fixo")
 
 btnAddCustoFixo.addEventListener("click", () => {
 
-    const item = addCustoFixo(inputNomeCustoFixo.value, inputValorCustoFixo.value, inputStatusCustoFixo.value, inputDurabilidadeCustoFixo.value)
+    // Cadastro do Custo Fixo
+    addCustoFixo(inputNomeCustoFixo.value, inputValorCustoFixo.value, inputStatusCustoFixo.value, inputDurabilidadeCustoFixo.value)
 
-    // Funcao para listar os valores na tela do usuario (Media | Total)
-    totalMedia()
+    //Atualiza os elementos da tela
+    realoadInterface()
 
-    // Limpar Campos do cadastro
+    // Reseta os campos do formulario
     resetarInputCadastroCustoFixo()
 
-    // Lista as informações na tela do usuario (Tabela com a lista de items)
-    addItemsTabela()
-
-    // Chama a função data para atualizar as informações na tela usando a variavel global
-    DATA()
-
+    // Atualiza o banco de dados com o novo cadastro
+    Local_storage.saveLocalStorage("custo_fixo", BD_GERAL_SYSTEM)
 })
 
 // Click no link para remover o item cadastrado (Removendo da classe e da tela do usuario)
 tbodyCustoFixo.addEventListener("click", (e) => {
+
+    // Ativa as funções somente se clicar no link
     if (e.target.tagName === "BUTTON") {
-        removerCustoFixoTabela(e.target.id)
-        addItemsTabela()
-        DATA()
+        const db = removerCustoFixoTabela(e.target.id)
+
+        //Atualiza os elementos da tela
+        realoadInterface()
+
+        console.log("EXCLUIDOS", db)
     }
-    addItemsTabela()
+
+
 })
 

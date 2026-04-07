@@ -1,17 +1,4 @@
-const menuHome = document.querySelector("#menu-home")
-const menuOrcamentoFinal = document.querySelector("#menu-orcamento-final")
-const menuMaoDeObra = document.querySelector("#menu-mao-de-obra")
-const menuListaMateriais = document.querySelector("#menu-lista-materiais")
-const menuCustoFixo = document.querySelector("#menu-custo-fixo")
-const menuRendaMensal = document.querySelector("#menu-renda-mensal")
-
-const cHome = document.querySelector("#home")
-const cOrcamentoFinal = document.querySelector("#orcamento-final")
-const cMaoDeObra = document.querySelector("#mao-de-obra")
-const cListaMateriais = document.querySelector("#lista-materiais")
-const cCustoFixo = document.querySelector("#custo-fixo")
-const cRendaMensal = document.querySelector("#renda-mensal")
-
+import { menuHome, menuOrcamentoFinal, menuMaoDeObra, menuListaMateriais, menuCustoFixo, menuRendaMensal, cHome, cOrcamentoFinal, cMaoDeObra, cListaMateriais, cCustoFixo, cRendaMensal } from "../ui_seletor_elementos.js"
 
 cOrcamentoFinal.classList.add("d-none")
 cMaoDeObra.classList.add("d-none")

@@ -1,8 +1,4 @@
-// Elementos selecionados Botão e Area de conteudo
-const btnAdicionar = document.querySelector("#btn-add-custo-fixo")
-const btnListar = document.querySelector("#btn-listar-custo-fixo")
-const divListarCustoFixo = document.querySelector("#listar-custo-fixo")
-const divCadastrarCustoFixo = document.querySelector("#cadastro-custo-fixo")
+import { btnAdicionar, btnListar, divCadastrarCustoFixo, divListarCustoFixo } from "../../app.js"
 
 // Configuração do botão de Adicionar Custo Fixo
 btnAdicionar.addEventListener("click", () => {
