@@ -1,21 +1,14 @@
 //Global
-import { BD_GERAL_SYSTEM } from "../bd/bd_global.js"
+import { BD_CUSTO_FIXO_GLOBAL } from "../bd/bd_global.js"
 
 // Classes
-import { Orcamento_final } from "../class/orcamento_final.js"
 import { Local_storage } from "../class/localstorage.js"
+
+// Instancia classe global
+import { NEWITEM } from "../bd/bd_global.js"
 
 // Seletores
 import { tbodyCustoFixo, inputNomeCustoFixo, inputValorCustoFixo, inputStatusCustoFixo, inputDurabilidadeCustoFixo, spanTotalItensCadastradosCustoFixo, pValorTotalCustoFixo, pValorMedioCustoFixo, inputSearchCustoFixo, divAtualizarCustoFixo, divListarCustoFixo, inputUpdateNomeCustoFixo, inputUpdateValorCustoFixo, inputUpdateStatusCustoFixo, inputUpdateDurabilidadeCustoFixo, inputUpdateIdHidden } from "../ui/ui_seletor_elementos.js"
-
-
-// Variaveis globais
-//--------------------------------------------------------------------------------------------------------------
-
-// instacia da classe Orçamento Final com acesso aos métodos de outras classes
-export const NEWITEM = new Orcamento_final() // Instancia da classe que gerencia o objeto custo fixo
-export const LC = new Local_storage() // Instancia da classe para salvar os dados no LocalStorage
-
 
 
 // Adicionando novos custo fixo usando classe e funcao construtora
@@ -53,7 +46,7 @@ export function addItemsTabelaCustoFixo(BD_GLOBAL = null) {
     tbodyCustoFixo.innerHTML = "";
 
     if (BD_GLOBAL === null) {
-        BD_GLOBAL = BD_GERAL_SYSTEM
+        BD_GLOBAL = BD_CUSTO_FIXO_GLOBAL
     }
 
     if (BD_GLOBAL.length <= 0) {
@@ -109,7 +102,7 @@ export function searchCustoFixoTabela(title) {
 
     let search = BD_GERAL_SYSTEM.filter((value) => value.nome.toLowerCase() === title.toLowerCase())
     if (!search.length > 0) {
-        search = BD_GERAL_SYSTEM
+        search = BD_CUSTO_FIXO_GLOBAL
     }
     realoadInterface(search)
 }
@@ -147,14 +140,18 @@ export function btnAddCustoFixoFn(e) {
     resetarInputCadastroCustoFixo()
 
     // Atualiza o banco de dados com o novo cadastro
-    Local_storage.saveLocalStorage("custo_fixo", BD_GERAL_SYSTEM)
+    Local_storage.saveLocalStorage("custo_fixo", BD_CUSTO_FIXO_GLOBAL)
 }
 
 
 // Função que ativa o evento de click no link para remover o custo fixo cadastrado
 export function tbodyCustoFixoFn(e) {
+
+
+
     // Ativa as funções somente se clicar no link de remover
     if (e.target.value === "remover") {
+
         const db = removerCustoFixoTabela(e.target.id)
 
         //Atualiza os elementos da tela
@@ -189,7 +186,7 @@ export function tbodyCustoFixoFn(e) {
 // Atualiza os campos do formulario com as informações referente ao id 
 export function updateCustoFixoFn(idCustoFixoUpdate) {
     // Atualiza os campos do input com o valor atual
-    let itemAtualizar = BD_GERAL_SYSTEM.map((value) => {
+    let itemAtualizar = BD_CUSTO_FIXO_GLOBAL.map((value) => {
         if (Number(value.id) === Number(idCustoFixoUpdate)) {
             inputUpdateIdHidden.value = value.id
             inputUpdateNomeCustoFixo.value = value.nome
@@ -201,7 +198,6 @@ export function updateCustoFixoFn(idCustoFixoUpdate) {
 }
 
 export function updateDataNovosDados(idCustoFixoUpdate) {
-    // Envia os valores para a classe Custo Fixo Atualizar os dados.
 
     // Recebe os novos valores para atualizar no banco e remover o item desatualizado
     const newNome = inputUpdateNomeCustoFixo.value

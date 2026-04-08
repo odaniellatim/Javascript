@@ -9,16 +9,6 @@
   <!-- <link rel='stylesheet' type='text/css' media='screen' href='main.css'> -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
-
-  <style>
-    .h500 {
-      height: 500px;
-    }
-
-    .h100 {
-      height: 100px;
-    }
-  </style>
 </head>
 
 <body>
@@ -85,7 +75,7 @@
         <!-- Detaque dos valores de custo total e por projeto-->
         <div class="row justify-content-center p-2 gap-2 text-center">
 
-          <div id="valor-total-custo-fixo" class="col-12 col-md fw-bold text-bg-warning p-4">
+          <div id="valor-total-custo-fixo" class="col-12 col-md fw-bold text-bg-light p-4">
             TOTAL CUSTO FIXO: R$ 00,00
           </div>
           <div id="valor-medio-custo-fixo" class="col-12 col-md fw-bold text-bg-success p-4">
@@ -109,17 +99,17 @@
 
           <div class="col">
             <table class="table table-striped">
-              <thead class="table-dark text-center">
+              <thead class="table-dark ">
 
                 <tr>
-                  <th scope="col">Nome</th>
-                  <th scope="col">Valor</th>
-                  <th scope="col">Status</th>
-                  <th scope="col" class="d-none d-md-table-cell">Durabilidade (meses)</th>
-                  <th scope="col">Ações</th>
+                  <th scope="col text-center">Nome</th>
+                  <th scope="col text-center">Valor</th>
+                  <th scope="col text-center">Status</th>
+                  <th scope="col text-center" class="d-none d-md-table-cell">Durabilidade (meses)</th>
+                  <th scope="col text-center">Ações</th>
                 </tr>
               </thead>
-              <tbody id="tbody-custo-fixo" class="text-center">
+              <tbody id="tbody-custo-fixo" class="">
                 <!-- Elementos adicionado via js-->
               </tbody>
             </table>
@@ -226,15 +216,55 @@
       </div>
 
       <!-- CONTEUDO PRINCIPAL RENDA MENSAL-->
-      <div id="renda-mensal" class="col-12 col-md-9 h500">
+      <div id="renda-mensal" class="col-12 col-md-9">
         <h2 class="fs-4 text-center mt-3"> Configurações da Renda Mensal</h2>
+
+        <div class="row p-2 mt-4 gap-3 gap-md-1 fw-bold">
+          <div id="renda-mensal-media-projeto" class="col-12 col-md text-bg-success p-4">RENDA MÉDIA PROJETO</div>
+          <div id="renda-mensal-renda-hora" class="col-12 col-md text-bg-light p-4">RENDA POR HORA</div>
+          <div id="renda-mensal-renda-minuto" class="col-12 col-md text-bg-light p-4">RENDA POR MINUTO</div>
+
+        </div>
+
+        <div class="row p-2 mt-2 gap-3">
+          <div class="col-12 col-md">
+            <label for="input-renda-mensal-valor" class="form-label">Renda Mensal</label>
+            <input type="number" class="form-control" id="input-renda-mensal-valor"
+              placeholder="Valor do sálario mensal">
+          </div>
+          <div class="col-12 col-md">
+            <label for="input-renda-mensal-dias" class="form-label">Dias totais trabalhados</label>
+            <input type="number" class="form-control" id="input-renda-mensal-dias"
+              placeholder="Total de dias trabalhados no mês">
+          </div>
+        </div>
+        <div class="row p-2 mt-2 gap-3">
+          <div class="col-12 col-md">
+            <label for="input-renda-mensal-horas" class="form-label">Horas totais trabalhados por dia</label>
+            <input type="number" class="form-control" id="input-renda-mensal-horas"
+              placeholder="Total de horas trabalhados no dia">
+          </div>
+          <div class="col-12 col-md">
+            <label for="input-renda-mensal-projetos" class="form-label">Total de projetos que deseja vender</label>
+            <input type="number" class="form-control" id="input-renda-mensal-projetos"
+              placeholder="Total de projetos vendidos no mês">
+          </div>
+        </div>
+
+        <div class="row mt-4 mb-5 p-2">
+          <div class="col">
+            <button id="btn-renda-mensal" class="btn btn-primary">Atualizar informações de Renda Mensal</button>
+          </div>
+
+        </div>
+
       </div>
 
     </div>
 
     <!-- FOOTER -->
     <div class="container-fluid">
-      <div class="col text-bg-dark text-center h100">FOOTER</div>
+      <div class="col text-bg-dark text-center">FOOTER</div>
     </div>
 
     <script type="module" src="assets/js/index.js"></script>

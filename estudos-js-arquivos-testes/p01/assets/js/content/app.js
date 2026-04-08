@@ -15,7 +15,7 @@ export * from "./ui/custo_fixo/bd_load_data.js"
 // Funções sistema
 //--------------------------------------------------------------------------------------------------------------
 export * from "./functions/functions_custo_fixo.js"
-
+export * from "./functions/functions_renda_mensal.js"
 
 
 
